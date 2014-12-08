@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<!--[if IE]>
+			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<![endif]-->
+		<title>Quick-start | SwiperProxy</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/vendor/bootswatch/bootstrap.min.css">
+		<style>
+			body {
+				padding-top: 50px;
+				padding-bottom: 20px;
+			}
+		</style>
+	        <script src="js/vendor/modernizr/modernizr-latest.js"></script>
+	</head>
+	<body>
+		<!--[if lt IE 7]>
+			<p class="browsehappy">You are using an <strong>outdated</strong> browser. <a href="http://browsehappy.com/">Upgrade your browser</a> to improve your user experience.</p>
+		<![endif]-->
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="/index.html">SwiperProxy</a>
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar-main">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="/download.html"><span class="glyphicon glyphicon-save"></span>&nbsp;Download</a>
+						</li>
+						<li class="active">
+							<a href="/quickstart.html"><span class="glyphicon glyphicon-file"></span>&nbsp;Quick-start</a>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="documentation"><span class="glyphicon glyphicon-book"></span>&nbsp;Documentation <span class="caret"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="documentation">
+								<li>
+									<a href="/documentation/enduser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;For end users</a></li>
+								</li>
+								<li>
+									<a href="/documentation/sysadmin.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a></li>
+								</li>
+								<li>
+									<a href="/documentation/developer.html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a></li>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<a href="/security.html"><span class="glyphicon glyphicon-lock"></span>&nbsp;Security</a>
+						</li>
+						<li>
+							<a href="https://github.com/SwiperProxy/swiperproxy/issues"><span class="glyphicon glyphicon-align-left"></span>&nbsp;Issue Tracker</a>
+						</li>
+						<li>
+							<a href="/donate.html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a>
+						</li>
+						<li>
+							<a href="/contact.html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact</a>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<h1>Quick-start guide <small>to get up and running within minutes</small></h1>
+			<p>SwiperProxy has little dependencies and can be installed in practically all major distributions.</p> 
+			<h2>Installing - select your operating system:</h2>
+			<ul>
+				<li><a href="#">Debian 7 (Wheezy)</a></li>
+			</ul>
+			<p>Not listed? <a href="#">View the detailed documentation &raquo;</a>
+			<hr/>
+			<h2>Configuring</h2>
+			<p>All configuration is done in the <code>proxy.conf</code> configuration file. A default configuration file detailing each configuration option is supplied.</p>
+			<p>The most important settings are:</p>
+			<ul>
+				<li><code>http_listen_port</code>, <code>https_listen_port</code>: The HTTP and HTTPS ports the proxy will listen on. You can configure the listen ports to be 80 and 443 and let users access the proxy directly by using <a href="#">libcap</a>. You can also place a <a href="#">reverse proxy</a> in-front of SwiperProxy. In that case, the listen ports should be different.</li>
+				<li><code>http_port</code>, <code>https_port</code>: These are the ports the proxy is reachable on from the outside. They may be different from the listen addresses, for example in case of a <a href="#">reverse proxy</a>.</li>
+				<li><code>https_certificate</code>: A PEM file that contains the SwiperProxy x.509 certificate, if necessary an intermediate CA certificate and the private key.</li>
+				<li><code>hostname</code>: The hostname SwiperProxy is reachable on.</li>
+				<li><code>block_robots</code>: If you want to ensure that web spiders/crawlers do not try to crawl the entire internet through your proxy, you can set this setting to yes.</li>
+				<li><code>[rewrites]:</code>: Under this section, you can add custom rewrites for specific hostnames. The syntax is <code>hostname=newhostname</code>. For instances, if you want to ensure that http://www.example.org/ does not pass through the proxy, you could create the following rewrite: <code>www.example.org=www.example.org</code>. You can also rewrite a specific hostname to pass through a different proxy: <code>www.example.org=proxy2.example.com/www.example.org</code>.</li>
+			</ul>
+			<p>As a final configuration step, you will need to edit the index.html file found in the html directory. Change the example hostname found in that file to your selected hostname. Of course you can also apply custom styling, change the logo, etc.</p>
+			<p>You may want to optionally add a wildcard DNS-record to your proxy, e.g. <code>IN A *.proxy.example.org</code>. This allows people to also browse to, for example, http://example.org.proxy.yourdomain.tld which will be rewritten to http://proxy.yourdomain.tld/example.org. This works, even when forcing HTTPS, though will likely always throw a certificate warning.</p>
+			<hr/>
+			<footer>
+				<p><a href="https://creativecommons.org/licenses/by/4.0/"><img src="img/80x15.png" alt="CC-BY 4.0"/></a> The SwiperProxy website is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+			</footer>
+		</div>
+		<script src="js/vendor/jquery/jquery-2.1.1.min.js"></script>
+		<script>window.jQuery || document.write('<script src="js/vendor/jquery/jquery-2.1.1.min.js"><\/script>')</script>
+		<script src="js/vendor/bootstrap/bootstrap.min.js"></script>
+	</body>
+</html>
