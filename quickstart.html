@@ -77,11 +77,21 @@
 		<div class="container">
 			<h1>Quick-start guide <small>to get up and running within minutes</small></h1>
 			<p>SwiperProxy has little dependencies and can be installed in practically all major distributions.</p> 
-			<h2>Installing - select your operating system:</h2>
+			<h2>Dependencies</h2>
 			<ul>
-				<li><a href="#">Debian 7 (Wheezy)</a></li>
-			</ul>
-			<p>Not listed? <a href="#">View the detailed documentation &raquo;</a>
+				<li><a href="#">Bootstrap</a>, 2.0.2 or higher</li>
+				<li><a href="#">Cython</a>, 0.15.1 or higher</li>
+				<li><a href="#">JQuery</a>, 1.7.2 or higher</li>
+				<li><a href="#">Modernizr</a>, 2.6.2 or higher</li>
+				<li><a href="#">Python</a>, 2.7 or higher</li>
+				<li><a href="#">Python IPY</a>, 0.75 or higher</li>
+				<li><a href="#">streamhtmlparser</a>, 0.1 or higher</li>
+			</ul> 
+			<hr/>
+			<h2>Installing</h2>
+			<p>Obtain the required dependencies (click each for more information). Most are likely available directly through your distribution's package manager and using your distribution's repositories is highly recommended.</p>
+			<p>Note: SwiperProxy does not include the required web libraries JQuery, Modernizr or Bootstrap, but expects to find these in the HTTP path <code>/javascript</code> and <code>/bootstrap</code>, which in some distro's is the alias to the library in <code>/usr/share</code>. View the detailed documentation for each dependency for more information on why this method is preferable to including them with SwiperProxy, and how to set this up if your distribution does not (properly) package these libraries.</p>
+			<p><a href="/download.html">Download or clone</a> SwiperProxy to your preferred location. FHS path would be <code>/opt/SwiperProxy/swiperproxy</code>.</p>
 			<hr/>
 			<h2>Configuring</h2>
 			<p>All configuration is done in the <code>proxy.conf</code> configuration file. A default configuration file detailing each configuration option is supplied.</p>
@@ -97,6 +107,8 @@
 			<p>As a final configuration step, you will need to edit the index.html file found in the html directory. Change the example hostname found in that file to your selected hostname. Of course you can also apply custom styling, change the logo, etc.</p>
 			<p>You may want to optionally add a wildcard DNS-record to your proxy, e.g. <code>IN A *.proxy.example.org</code>. This allows people to also browse to, for example, http://example.org.proxy.yourdomain.tld which will be rewritten to http://proxy.yourdomain.tld/example.org. This works, even when forcing HTTPS, though will likely always throw a certificate warning.</p>
 			<hr/>
+			<h2>Running SwiperProxy</h2>
+			<p><code>python Proxy.py</code> or <a href="#">run as a daemon</a>.</p>
 			<footer>
 				<p><a href="https://creativecommons.org/licenses/by/4.0/"><img src="img/80x15.png" alt="CC-BY 4.0"/></a> The SwiperProxy website is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
 			</footer>
