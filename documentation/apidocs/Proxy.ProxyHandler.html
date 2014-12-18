@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Proxy.ProxyHandler : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">P.ProxyHandler(<span title="BaseHTTPServer.BaseHTTPRequestHandler">BaseHTTPRequestHandler</span>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="Proxy.html">Proxy</a></span>
+      
+      <a href="classIndex.html#Proxy.ProxyHandler">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="Proxy.ProxySSLHandler.html">Proxy.ProxySSLHandler</a></p>
+    </div>
+    <div class="docstring">
+      <div><p>Request handler for HTTP requests.</p><table class="fieldTable"></table></div>
+    </div>
+
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id10">
+  
+  
+  <tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#__init__">__init__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#is_ssl">is_ssl</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#rewrite_referer">rewrite_referer</a></td>
+    <td><span>Rewrite the referer URL, stripping the proxy hostname part.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#handle_redirect">handle_redirect</a></td>
+    <td><span>Handle the Location header in the headers, saving the new location in 
+the response object.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#parse_accept_encoding">parse_accept_encoding</a></td>
+    <td><span>Parse the incoming request's accept-encoding header to determine if we 
+can gzip.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#do_GET">do_GET</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#do_POST">do_POST</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#do_GETPOST">do_GETPOST</a></td>
+    <td><span>Handle GET and POST requests: fetch the page, rewrite it and return it 
+to the client. The 'post' boolean determines if this is a POST request and 
+if so, the post data is read.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#rewrite_cookie">rewrite_cookie</a></td>
+    <td><span>Rewrite the cookie to have the correct domain attribute.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#handle_rewritable">handle_rewritable</a></td>
+    <td><span>Handle HTML, JS and CSS pages.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#reader">reader</a></td>
+    <td><span>Function used to read blocks from the server response. GZIP decompresses
+if necessary.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#writer">writer</a></td>
+    <td><span>Function used to write blocks to the client. GZIP compresses if 
+necessary.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#handle_content">handle_content</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#is_blocked">is_blocked</a></td>
+    <td><span>Returns true if the remote host is blocked.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#is_disallowed">is_disallowed</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#handle_robot_block">handle_robot_block</a></td>
+    <td><span>If robots should be blocked and '/robots.txt' is requested, then send a 
+fake robots.txt blocking robots. Returns True if we send the fake 
+robots.txt.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#handle_own">handle_own</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#handle_file">handle_file</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#my_log_error">my_log_error</a></td>
+    <td><span>Log a request to error log.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#my_log_request">my_log_request</a></td>
+    <td><span>Log a request to access log.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#log_request">log_request</a></td>
+    <td><span>Override the log_request() method to not log anything.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#log_error">log_error</a></td>
+    <td><span>Override the log_error() method to not log anything.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Proxy.ProxyHandler.html#address_string">address_string</a></td>
+    <td><span>Override the address_string method to resolve the client address based 
+on the configuration setting.</span></td>
+  </tr>
+</table>
+      
+    </div>
+    
+    
+
+    <div class="function">
+  <a name="Proxy.ProxyHandler.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, request, client_address, server):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <a href="Proxy.ProxySSLHandler.html">Proxy.ProxySSLHandler</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.is_ssl">
+    
+  </a>
+  <a name="is_ssl">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    is_ssl(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    <div class="interfaceinfo">overridden in <a href="Proxy.ProxySSLHandler.html">Proxy.ProxySSLHandler</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.rewrite_referer">
+    
+  </a>
+  <a name="rewrite_referer">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    rewrite_referer(self, url):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Rewrite the referer URL, stripping the proxy hostname part.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.handle_redirect">
+    
+  </a>
+  <a name="handle_redirect">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    handle_redirect(self, resp):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Handle the Location header in the headers, saving the new location in 
+the response object.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.parse_accept_encoding">
+    
+  </a>
+  <a name="parse_accept_encoding">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    parse_accept_encoding(self, v):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Parse the incoming request's accept-encoding header to determine if we 
+can gzip.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.do_GET">
+    
+  </a>
+  <a name="do_GET">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    do_GET(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.do_POST">
+    
+  </a>
+  <a name="do_POST">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    do_POST(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.do_GETPOST">
+    
+  </a>
+  <a name="do_GETPOST">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    do_GETPOST(self, post):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Handle GET and POST requests: fetch the page, rewrite it and return it 
+to the client. The 'post' boolean determines if this is a POST request and 
+if so, the post data is read.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.rewrite_cookie">
+    
+  </a>
+  <a name="rewrite_cookie">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    rewrite_cookie(self, cookie):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Rewrite the cookie to have the correct domain attribute.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.handle_rewritable">
+    
+  </a>
+  <a name="handle_rewritable">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    handle_rewritable(self, resp, rewriter_class):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Handle HTML, JS and CSS pages.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.reader">
+    
+  </a>
+  <a name="reader">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reader(self, BLKSIZE):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Function used to read blocks from the server response. GZIP decompresses
+if necessary.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.writer">
+    
+  </a>
+  <a name="writer">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    writer(self, string):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Function used to write blocks to the client. GZIP compresses if 
+necessary.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.handle_content">
+    
+  </a>
+  <a name="handle_content">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    handle_content(self, resp):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.is_blocked">
+    
+  </a>
+  <a name="is_blocked">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    is_blocked(self, remote_host):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Returns true if the remote host is blocked.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.is_disallowed">
+    
+  </a>
+  <a name="is_disallowed">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    is_disallowed(self, remote_host):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Returns true if the remote_host is not allowed: its name is too long, it
+is not a correct hostname, contains only a single label or its addresses or
+the hostname itself are part of private networks.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.handle_robot_block">
+    
+  </a>
+  <a name="handle_robot_block">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    handle_robot_block(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>If robots should be blocked and '/robots.txt' is requested, then send a 
+fake robots.txt blocking robots. Returns True if we send the fake 
+robots.txt.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.handle_own">
+    
+  </a>
+  <a name="handle_own">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    handle_own(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Handle requests destined for the proxy itself, such as the initial page 
+and authentication requests. Also handles requests for unknown hostnames or
+non-existing host-header. Returns true if request was handled here.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.handle_file">
+    
+  </a>
+  <a name="handle_file">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    handle_file(self, fn):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.my_log_error">
+    
+  </a>
+  <a name="my_log_error">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    my_log_error(self, error_msg):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Log a request to error log.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.my_log_request">
+    
+  </a>
+  <a name="my_log_request">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    my_log_request(self, status, size):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Log a request to access log.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.log_request">
+    
+  </a>
+  <a name="log_request">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    log_request(self, code='-', size='-'):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Override the log_request() method to not log anything.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.log_error">
+    
+  </a>
+  <a name="log_error">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    log_error(self, format, *args):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Override the log_error() method to not log anything.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Proxy.ProxyHandler.address_string">
+    
+  </a>
+  <a name="address_string">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    address_string(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Override the address_string method to resolve the client address based 
+on the configuration setting.</p><table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for <a href="https://swiperproxy.github.io">SwiperProxy</a>, generated by <a href="https://launchpad.net/pydoctor/">pydoctor</a> at 2014-12-18 23:03:43.
+    </address>
+  </body>
+</html>

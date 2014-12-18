@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>Page.Page : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">P.Page(<span title="HtmlParser">HtmlParser</span>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="Page.html">Page</a></span>
+      
+      <a href="classIndex.html#Page.Page">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div class="docstring">
+      <div class="undocumented">No class docstring</div>
+    </div>
+
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id8">
+  
+  
+  <tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#__init__">__init__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#create_tabs_and_attribs">create_tabs_and_attribs</a></td>
+    <td><span>Based on a list of tuples, create a hash-table with tagnames plus 
+attribute names as keys.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#rewrite_url">rewrite_url</a></td>
+    <td><span>Rewrite a matched URL attribute value snippet.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#rewrite">rewrite</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#handle_tag">handle_tag</a></td>
+    <td><span>Read and parse tag contents in blocks of the configured max_page_size. 
+Rewrite them based on the tag type: script or style.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#buffered_writer">buffered_writer</a></td>
+    <td><span>This function writes data to the output buffer and writes the output 
+buffer to the client if necessary.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#parsing_reader">parsing_reader</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#handle_attribute">handle_attribute</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#keep_reading">keep_reading</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#parse_until_interesting">parse_until_interesting</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#write_output">write_output</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="Page.Page.html#is_url_attribute">is_url_attribute</a></td>
+    <td><span>Returns True if the attribute in the tag should contain a URL.</span></td>
+  </tr>
+</table>
+      
+    </div>
+    
+    
+
+    <div class="function">
+  <a name="Page.Page.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, config, ssl, reader, writer, remote_host):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="Page.Page.create_tabs_and_attribs">
+    
+  </a>
+  <a name="create_tabs_and_attribs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    create_tabs_and_attribs(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Based on a list of tuples, create a hash-table with tagnames plus 
+attribute names as keys.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Page.Page.rewrite_url">
+    
+  </a>
+  <a name="rewrite_url">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    rewrite_url(self, m):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Rewrite a matched URL attribute value snippet.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Page.Page.rewrite">
+    
+  </a>
+  <a name="rewrite">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    rewrite(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="Page.Page.handle_tag">
+    
+  </a>
+  <a name="handle_tag">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    handle_tag(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Read and parse tag contents in blocks of the configured max_page_size. 
+Rewrite them based on the tag type: script or style.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Page.Page.buffered_writer">
+    
+  </a>
+  <a name="buffered_writer">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    buffered_writer(self, s):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function writes data to the output buffer and writes the output 
+buffer to the client if necessary.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Page.Page.parsing_reader">
+    
+  </a>
+  <a name="parsing_reader">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    parsing_reader(self, BLKSIZE):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>This function is used to read a block of data from the server response 
+and parse it until the end of the response or tag close. This function is 
+used for the JSPage and CSSPage classes as reader and should not update the
+input buffer of the Page instance with data within &lt;script&gt; and 
+&lt;style&gt; tags.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Page.Page.handle_attribute">
+    
+  </a>
+  <a name="handle_attribute">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    handle_attribute(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="Page.Page.keep_reading">
+    
+  </a>
+  <a name="keep_reading">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    keep_reading(self, max_size, states):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Keep reading from the input stream in blocks until one of the requested 
+states is reached or the maximum size is passed. Fill the input buffer with
+the data and return. Do not write data to the output buffer because this 
+data is going to be rewritten. The first time in the loop, use the current 
+input buffer and do not read any data yet.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Page.Page.parse_until_interesting">
+    
+  </a>
+  <a name="parse_until_interesting">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    parse_until_interesting(self):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="Page.Page.write_output">
+    
+  </a>
+  <a name="write_output">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    write_output(self, final):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Write output buffer in BLKSIZE blocks to the client. If final is set, 
+write everything, including the last block even if it is smaller than 
+BLKSIZE. Remove written blocks from the output buffer.</p><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="Page.Page.is_url_attribute">
+    
+  </a>
+  <a name="is_url_attribute">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    is_url_attribute(self, this_tag, this_attrib):
+    
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Returns True if the attribute in the tag should contain a URL.</p><table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for <a href="https://swiperproxy.github.io">SwiperProxy</a>, generated by <a href="https://launchpad.net/pydoctor/">pydoctor</a> at 2014-12-18 23:03:43.
+    </address>
+  </body>
+</html>
