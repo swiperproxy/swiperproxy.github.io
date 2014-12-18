@@ -106,45 +106,48 @@
 				<div ng-show="debian">
 					<hr/>
 					<h3>Debian 7 Wheezy</h3>
-					<p>Install the dependencies available from the stable repository:</p>
-					<code>$ apt-get install build-essential cython libcap2-bin libjs-jquery python python-dev python-ipy sudo wget</code>
-					<p>Install the Modernizr library manually as it is not yet available in stable:</p>
-					<code>$ mkdir /usr/local/share/javascript</code>
-					<code>$ mkdir /usr/local/share/javascript/modernizr</code>
-					<code>$ wget http://modernizr.com/downloads/modernizr-latest.js -O /usr/local/share/javascript/modernizr/modernizr.min.js</code>
-					<code>$ ln -s /usr/local/share/javascript/modernizr /usr/share/javascript/modernizr</code>
-					<p>Install the Bootstrap library manually as well:</p>
-					<code>$ wget https://github.com/twbs/bootstrap/releases/download/v3.3.1/bootstrap-3.3.1-dist.zip -O /usr/local/src/bootstrap-3.3.1-dist.zip</code>
-					<code>$ unzip /usr/local/src/bootstrap-3-3.1.zip</code>
-					<code>$ mv /usr/local/src/dist /usr/local/share/bootstrap</code>
-					<code>$ ln -s /usr/local/share/bootstrap /usr/share/bootstrap</code>
-					<p>Download and extract SwiperProxy:</p>
-					<code>$ mkdir /opt/SwiperProxy</code>
-					<code>$ wget https://github.com/SwiperProxy/swiperproxy/archive/swiperproxy-1.0.tar.gz -O /usr/local/src/swiperproxy-1.0.tar.gz</code>
-					<code>$ tar -zxvf /usr/local/src/swiperproxy-1.0.tar.gz</code>
-					<code>$ mv /usr/local/src/swiperproxy /opt/SwiperProxy/swiperproxy</code>
-					<p>Symlink the JavaScript and Bootstrap libraries so SwiperProxy can access them:</p>
-					<code>$ ln -s /usr/share/javascript /opt/SwiperProxy/swiperproxy/swiperproxy/htdocs/javascript</code>
-					<code>$ ln -s /usr/share/bootstrap /opt/SwiperProxy/swiperproxy/swiperproxy/htdocs/bootstrap</code>
-					<p>Compile streamhtmlparser and its Python module:</p>
-					<code>$ cd /opt/SwiperProxy/swiperproxy/streamhtmlparser</code>
-					<code>$ ./configure</code>
-					<code>$ make</code>
-					<code>$ make install</code>
-					<code>$ cd src/py-streamhtmlparser</code>
-					<code>$ make</code>
-					<code>$ make install</code>
-					<p>Copy the Python packages to a location where Debian will recognize them:</p>
-					<code>$ cp /usr/local/lib/python2.7/dist-packages/* /usr/lib/python2.7/dist-packages</code>
-					<code>$ ldconfig -v</code>
-					<p>Create the runtime environment and add an unprivileged user:</p>
-					<code>$ mkdir /var/log/swiperproxy</code>
-					<code>$ addgroup --system swiperproxy</code>
-					<code>$ adduser --system swiperproxy --ingroup=swiperproxy --home=/opt/SwiperProxy/swiperproxy/swiperproxy</code>
-					<code>$ chown swiperproxy:swiperproxy /var/log/swiperproxy</code>
-					<code>$ chown swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy/swiperproxy</code>
-					<p>Give <code>CAP_NET_BIND_SERVICE</code> to <code>Proxy.py</code> so it can bind to privileged ports (below 1024)</p>
-					<code>$ setcap 'cap_net_bind_service=+ep' /opt/SwiperProxy/swiperproxy/swiperproxy/Proxy.py</code>
+					<p>Install the dependencies available from the stable repository:<br/>
+					<code>$ apt-get install build-essential cython libcap2-bin libjs-jquery python python-dev python-ipy sudo wget</code></p>
+					<p>Install the Modernizr library manually as it is not yet available in stable:<br/>
+					<code>$ mkdir /usr/local/share/javascript</code><br/>
+					<code>$ mkdir /usr/local/share/javascript/modernizr</code><br/>
+					<code>$ wget http://modernizr.com/downloads/modernizr-latest.js \</code><br/>
+					<code>-O /usr/local/share/javascript/modernizr/modernizr.min.js</code><br/>
+					<code>$ ln -s /usr/local/share/javascript/modernizr /usr/share/javascript/modernizr</code></p>
+					<p>Install the Bootstrap library manually as well:<br/>
+					<code>$ wget https://github.com/twbs/bootstrap/releases/download/v3.3.1/bootstrap-3.3.1-dist.zip \</code><br/>
+					<code>-O /usr/local/src/bootstrap-3.3.1-dist.zip</code><br/>
+					<code>$ unzip /usr/local/src/bootstrap-3-3.1.zip</code><br/>
+					<code>$ mv /usr/local/src/dist /usr/local/share/bootstrap</code><br/>
+					<code>$ ln -s /usr/local/share/bootstrap /usr/share/bootstrap</code></p>
+					<p>Download and extract SwiperProxy:<br/>
+					<code>$ mkdir /opt/SwiperProxy</code><br/>
+					<code>$ wget https://github.com/SwiperProxy/swiperproxy/archive/swiperproxy-1.0.tar.gz \</code><br/>
+					<code>-O /usr/local/src/swiperproxy-1.0.tar.gz</code><br/>
+					<code>$ tar -zxvf /usr/local/src/swiperproxy-1.0.tar.gz</code><br/>
+					<code>$ mv /usr/local/src/swiperproxy /opt/SwiperProxy/swiperproxy</code></p>
+					<p>Symlink the JavaScript and Bootstrap libraries so SwiperProxy can access them:<br/>
+					<code>$ ln -s /usr/share/javascript /opt/SwiperProxy/swiperproxy/swiperproxy/htdocs/javascript</code><br/>
+					<code>$ ln -s /usr/share/bootstrap /opt/SwiperProxy/swiperproxy/swiperproxy/htdocs/bootstrap</code></p>
+					<p>Compile streamhtmlparser and its Python module:<br/>
+					<code>$ cd /opt/SwiperProxy/swiperproxy/streamhtmlparser</code><br/>
+					<code>$ ./configure</code><br/>
+					<code>$ make</code><br/>
+					<code>$ make install</code><br/>
+					<code>$ cd src/py-streamhtmlparser</code><br/>
+					<code>$ make</code><br/>
+					<code>$ make install</code></p>
+					<p>Copy the Python packages to a location where Debian will recognize them:<br/>
+					<code>$ cp /usr/local/lib/python2.7/dist-packages/* /usr/lib/python2.7/dist-packages</code><br/>
+					<code>$ ldconfig -v</code></p>
+					<p>Create the runtime environment and add an unprivileged user:<br/>
+					<code>$ mkdir /var/log/swiperproxy</code><br/>
+					<code>$ addgroup --system swiperproxy</code><br/>
+					<code>$ adduser --system swiperproxy --ingroup=swiperproxy --home=/opt/SwiperProxy/swiperproxy/swiperproxy</code><br/>
+					<code>$ chown swiperproxy:swiperproxy /var/log/swiperproxy</code><br/>
+					<code>$ chown swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy/swiperproxy</code></p>
+					<p>Give <code>CAP_NET_BIND_SERVICE</code> to <code>Proxy.py</code> so it can bind to privileged ports (below 1024):<br/>
+					<code>$ setcap 'cap_net_bind_service=+ep' /opt/SwiperProxy/swiperproxy/swiperproxy/Proxy.py</code></p>
 				</div>
 			</div>
 			<hr/>
