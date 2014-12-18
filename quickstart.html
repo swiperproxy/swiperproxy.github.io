@@ -83,7 +83,8 @@
 		</nav>
 		<div class="container">
 			<h1>Quick-start guide <small>to get up and running within minutes</small></h1>
-			<p>SwiperProxy has little dependencies and can be installed in practically all major distributions.</p> 
+			<p>SwiperProxy has few dependencies and can be installed in practically all major distributions.</p> 
+			<hr/>
 			<h2>Dependencies</h2>
 			<ul>
 				<li><a href="#">Bootstrap</a>, 2.0.2 or higher</li>
@@ -155,7 +156,7 @@
 			<p>All configuration is done in the <code>proxy.conf</code> configuration file. A default configuration file detailing each configuration option is supplied.</p>
 			<p>The most important settings are:</p>
 			<ul>
-				<li><code>http_listen_port</code>, <code>https_listen_port</code>: The HTTP and HTTPS ports the proxy will listen on. You can configure the listen ports to be 80 and 443 and let users access the proxy directly by using <a href="#">libcap</a>. You can also place a <a href="#">reverse proxy</a> in-front of SwiperProxy. In that case, the listen ports should be different.</li>
+				<li><code>http_listen_port</code>, <code>https_listen_port</code>: The HTTP and HTTPS ports the proxy will listen on. You can configure the listen ports to be 80 and 443 and let users access the proxy directly by using <a href="/documentation/sys-libcap.html">libcap</a>. You can also place a <a href="#">reverse proxy</a> in-front of SwiperProxy. In that case, the listen ports should be different.</li>
 				<li><code>http_port</code>, <code>https_port</code>: These are the ports the proxy is reachable on from the outside. They may be different from the listen addresses, for example in case of a <a href="#">reverse proxy</a>.</li>
 				<li><code>https_certificate</code>: A PEM file that contains the SwiperProxy x.509 certificate, if necessary an intermediate CA certificate and the private key.</li>
 				<li><code>hostname</code>: The hostname SwiperProxy is reachable on.</li>

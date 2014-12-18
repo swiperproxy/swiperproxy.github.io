@@ -8,7 +8,7 @@
 		<!--[if IE]>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<![endif]-->
-		<title>Developer Documentation | SwiperProxy</title>
+		<title>Generating an x.509 certificate | SwiperProxy</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="../css/vendor/bootswatch/bootstrap.min.css">
@@ -48,10 +48,10 @@
 								<li>
 									<a href="/documentation/enduser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;For end users</a>
 								</li>
-								<li>
+								<li class="active">
 									<a href="/documentation/sysadmin.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a>
 								</li>
-								<li class="active">
+								<li>
 									<a href="/documentation/developer.html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a>
 								</li>
 							</ul>
@@ -80,11 +80,16 @@
 			</div>
 		</nav>
 		<div class="container">
-			<h1>Documentation <small>for developers.</small></h1>
-			<ul>
-				<li>API-documentation</li>
-				<li>Coding conventions</li>
-				<li>Infrastructure for contributors</li>
+			<h1>Generating an x.509 certificate</h1>
+			<p>An x.509 is required if you want to use HTTP over TLS (HTTPS) in any capacity. This is obviously running SwiperProxy towards clients with HTTPS support, but also connecting to destination servers required an x.509 certificate.</p>
+			<p>Generating one is easily done with OpenSSL. First, you should make sure you have somewhere to store certificate signing requests:<br/><code>$ mkdir /etc/ssl/csr</code></p>
+			<p>Next, generate a private key and CSR:<br/><code>$ openssl req -new -newkey rsa:4096 -nodes -sha512 -out /etc/ssl/csr/proxy.example.org.csr -keyout /etc/ssl/private/proxy.example.org.key</code></p>
+			<p>You will be prompted to fill in the information that will be embedded in your CSR. It is highly recommended that you fill this in truthfully. Using a period <code>.</code> inputs <code>NULL</code>, e.g. if you do not have an organisation. For example:<br/><code>Country Name (2 letter code) [AU]:AU</code><br/><code>State or Province Name (full name) [Some-State]:ACT</code><br/><code>Locality Name (eg, city) []: Sydney</code><br/><code>Organization Name (eg, company) [Internet Widgits Pty Ltd]:.</code><br/><code>Organizational Unit Name (eg, section) []:.</code><br/><code>Common Name (e.g. server FQDN or YOUR name) []:proxy.example.org</code><br/><code>Email Address []:hostmaster@example.org</code></p>
+			<p>It is recommended you do not use a challenge password. Company name is as stated, optional.</p>
+			<p>You may want to get your certificate signed by a trusted CA. In this case, you will need to submit the CSR you just generated to your CA. You will be returned a certificate that you should place in <code>/etc/ssl/certs</code>.</p>
+			<p>If you want to self-sign your certificate:<br/><code>$ openssl x509 -req -sha512 -days 365 -in /etc/ssl/csr/proxy.example.org.csr -signkey /etc/ssl/private/proxy.example.org.key -out /etc/ssl/certs/proxy.example.org.pem</code></p>
+			<p>Either way, to use the certificate, it must be readable by the SwiperProxy user, and in a format that SwiperProxy will understand. To do this, concatenate the private key, certificate and any intermediate certificates (in signing order) and make the file readable by the SwiperProxy user. For example:<br/><code>$ cp /etc/ssl/private/proxy.example.org.key /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</code><br/><code>$ cat /etc/ssl/certs/proxy.example.org.pem > /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</code><br/><code>$ cat /etc/ssl/certs/ca.intermediate.cert.pem > /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</code><br/><code>$ chown swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</code><br/><code>$ chmod 400 /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</code></p>
+			<p><p>See <code>man openssl</code> for more information.</p>
 			<hr/>
 			<footer>
 				<p><a href="https://creativecommons.org/licenses/by/4.0/"><img src="../img/80x15.png" alt="CC-BY 4.0"/></a> <small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small><br/><img src="../img/freesoftware.png" alt="Free Software"/>&nbsp;<img src="../img/opensource.png" alt="Open Source"/>&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md"><img src="../img/mitlicense.png" alt="MIT License"/></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md">MIT license</a>.</small></p>

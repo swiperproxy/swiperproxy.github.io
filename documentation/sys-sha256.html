@@ -8,17 +8,16 @@
 		<!--[if IE]>
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<![endif]-->
-		<title>Contact | SwiperProxy</title>
+		<title>Verifying SHA-256 hashes | SwiperProxy</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="css/vendor/bootswatch/bootstrap.min.css">
+		<link rel="stylesheet" href="../css/vendor/bootswatch/bootstrap.min.css">
 		<style>
 			body {
 				padding-top: 50px;
 				padding-bottom: 20px;
 			}
 		</style>
-	        <script src="js/vendor/modernizr/modernizr-latest.js"></script>
 	</head>
 	<body>
 		<!--[if lt IE 7]>
@@ -47,9 +46,9 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="documentation"><span class="glyphicon glyphicon-book"></span>&nbsp;Documentation <span class="caret"></span></a>
 							<ul class="dropdown-menu" aria-labelledby="documentation">
 								<li>
-									<a href="/documentation/enduser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;For end users</a><
+									<a href="/documentation/enduser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;For end users</a>
 								</li>
-								<li>
+								<li class="active">
 									<a href="/documentation/sysadmin.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a>
 								</li>
 								<li>
@@ -72,7 +71,7 @@
 						<li>
 							<a href="/donate.html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a>
 						</li>
-						<li class="active">
+						<li>
 							<a href="/contact.html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact</a>
 						</li>
 						
@@ -81,25 +80,26 @@
 			</div>
 		</nav>
 		<div class="container">
-			<h1>Get in touch <small>with SwiperProxy devs and users.</small></h1>
-			<p>There are multiple ways you can connect with both developers and fellow users and enjoy the community support enjoyed by open source projects.</p>
+			<h1>Verifying SHA-256 sums</h1>
 			<hr/>
-			<h2>Bug reports</h2>
-			<p>Please use our <a href="https://github.com/SwiperProxy/swiperproxy/issues">Issue Tracker</a> to report bugs. For security issues, see <a href="/security.html">Security</a>.</p>
+			<h2>Why?</h2>	
+			<p>While all distribution channels support TLS encryption to ensure the authenticity of the data, it is good practice to verify downloads by its sum.</p>
+			<p>Historically, the MD5 and SHA-1 hashing algorithms are commonly used. However, MD5 has been explicitly considered insecure for quite a while now, and SHA-1 has been deprecated as well due to possible collision and preimage attacks. This is why we choose to use SHA-256, which should be good for quite a few years.</p>
+			<p>Under each release in the <a href="/download.html">Download page</a> you will find the full SHA-256 sum of the ZIP archive or tarball as we distribute it. When you verify locally, your hash and the published hash should match. If they don't, then your release has possibly been tampered with and you should exercise caution.</p>
 			<hr/>
-			<h2>Support</h2>
-			<p><strong>Do not use e-mail for support questions. These will be discarded.</strong></p>
-			<p>An IRC channel, <em>#swiperproxy</em> is available on <a href="https://freenode.net/">Freenode</a>.</p> URI: <a href="ircs://irc.freenode.net:6697/#swiperproxy">ircs://irc.freenode.net:6697/#swiperproxy</a>.
+			<h2>How?</h2>
+			<p>It is likely you already have the <code>sha256sum</code> binary in your distribution as it is part of the <a href="http://www.gnu.org/software/coreutils/">GNU coreutils</a>. If not, your distribution likely has a package. In Debian, it is <code>coreutils</code>.</p>
+			<p>To verify, simply run <code>sha256sum</code> with the ZIP archive or tarball as its only argument. For example:<br/><code>$ sha256sum /usr/local/src/swiperproxy-1.0.tar.gz</code></p>
+			<p>Compare this hash to the published hash for the release you downloaded and make sure they match.</p>
 			<hr/>
-			<h2>Webchat</h2>
-			<p><iframe src="https://webchat.freenode.net/?channels=%23swiperproxy&amp;fg_color=000000&amp;fg_sec_color=000000&amp;bg_color=FFFFFF&amp;prompt=1" height="400" width="647" frameBorder="0"></iframe></p>
+			<p>See <code>sha256sum --help</code> or <code>man sha256sum</code> for more information.</p>
 			<hr/>
 			<footer>
-				<p><a href="https://creativecommons.org/licenses/by/4.0/"><img src="img/80x15.png" alt="CC-BY 4.0"/></a> <small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small><br/><img src="img/freesoftware.png" alt="Free Software"/>&nbsp;<img src="img/opensource.png" alt="Open Source"/>&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md"><img src="img/mitlicense.png" alt="MIT License"/></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md">MIT license</a>.</small></p>
+				<p><a href="https://creativecommons.org/licenses/by/4.0/"><img src="../img/80x15.png" alt="CC-BY 4.0"/></a> <small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small><br/><img src="../img/freesoftware.png" alt="Free Software"/>&nbsp;<img src="../img/opensource.png" alt="Open Source"/>&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md"><img src="../img/mitlicense.png" alt="MIT License"/></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md">MIT license</a>.</small></p>
 			</footer>
 		</div>
-		<script src="js/vendor/jquery/jquery-2.1.1.min.js"></script>
-		<script>window.jQuery || document.write('<script src="js/vendor/jquery/jquery-2.1.1.min.js"><\/script>')</script>
-		<script src="js/vendor/bootstrap/bootstrap.min.js"></script>
+		<script src="../js/vendor/jquery/jquery-2.1.1.min.js"></script>
+		<script>window.jQuery || document.write('<script src="../js/vendor/jquery/jquery-2.1.1.min.js"><\/script>')</script>
+		<script src="../js/vendor/bootstrap/bootstrap.min.js"></script>
 	</body>
 </html>
