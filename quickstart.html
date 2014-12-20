@@ -63,7 +63,7 @@
         <section>
           <h2>Installing</h2>
           <aside class="alert alert-info" role="alert">
-            <p><span class="glyphicon glyphicon-comment"></span>&nbsp;This makes some assumptions about your preferences towards retrieval method, wget vs curl, etc. You may want to look at the <a href="/documentation/sysadmin.html">detailed documentation</a>.</p>
+            <p><span class="glyphicon glyphicon-comment"></span>&nbsp;This makes some assumptions about your preferences towards retrieval method, wget vs curl, etc. You may want to look at the <a href="documentation/sysadmin.html" title="Detailed documentation" type="text/html">detailed documentation</a>.</p>
           </aside>
           <section>
             <h3>Select your distribution:</h3>
@@ -128,7 +128,7 @@
           <p>All configuration is done in the <strong>proxy.conf</strong> configuration file. A default configuration file detailing each configuration option is supplied.</p>
           <p>The most important settings are:</p>
           <ul>
-            <li><var>http_listen_port</var>, <var>https_listen_port</var>: The <abbr title="Hypertext Transfer Protocol">HTTP</abbr> and <abbr title="HTTP Secure">HTTPS</abbr> ports the proxy will listen on. You can configure the listen ports to be 80 and 443 and let users access the proxy directly by using <a href="/documentation/sys-libcap.html" title="libcap" type="text/html">libcap</a>. You can also place a <a href="#" title="Reverse proxy" type="text/html">reverse proxy</a> in-front of SwiperProxy. In that case, the listen ports should be different.</li>
+            <li><var>http_listen_port</var>, <var>https_listen_port</var>: The <abbr title="Hypertext Transfer Protocol">HTTP</abbr> and <abbr title="HTTP Secure">HTTPS</abbr> ports the proxy will listen on. You can configure the listen ports to be 80 and 443 and let users access the proxy directly by using <a href="documentation/sys-libcap.html" title="libcap" type="text/html">libcap</a>. You can also place a <a href="#" title="Reverse proxy" type="text/html">reverse proxy</a> in-front of SwiperProxy. In that case, the listen ports should be different.</li>
             <li><var>http_port</var>, <var>https_port</var>: These are the ports the proxy is reachable on from the outside. They may be different from the listen addresses, for example in case of a <a href="#" title="Reverse proxy" type="text/html">reverse proxy</a>.</li>
             <li><var>https_certificate</var>: A Base64-encoded <abbr title="Distinguished Encoding Rules">DER</abbr> file that contains the SwiperProxy x.509 certificate, if necessary an intermediate <abbr title="Certificate Authority">CA</abbr> certificate and the private key.</li>
             <li><var>hostname</var>: The hostname SwiperProxy is reachable on.</li>
