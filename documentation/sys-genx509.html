@@ -1,102 +1,85 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-	<head>
-		<meta charset="utf-8">
-		<!--[if IE]>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<![endif]-->
-		<title>Generating an x.509 certificate | SwiperProxy</title>
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="../css/vendor/bootswatch/bootstrap.min.css">
-		<style>
-			body {
-				padding-top: 50px;
-				padding-bottom: 20px;
-			}
-		</style>
-	</head>
-	<body>
-		<!--[if lt IE 7]>
-			<p class="browsehappy">You are using an <strong>outdated</strong> browser. <a href="http://browsehappy.com/">Upgrade your browser</a> to improve your user experience.</p>
-		<![endif]-->
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/index.html">SwiperProxy</a>
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				<div class="collapse navbar-collapse" id="navbar-main">
-					<ul class="nav navbar-nav">
-						<li>
-							<a href="/download.html"><span class="glyphicon glyphicon-save"></span>&nbsp;Download</a>
-						</li>
-						<li>
-							<a href="/quickstart.html"><span class="glyphicon glyphicon-file"></span>&nbsp;Quick-start</a>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="documentation"><span class="glyphicon glyphicon-book"></span>&nbsp;Documentation <span class="caret"></span></a>
-							<ul class="dropdown-menu" aria-labelledby="documentation">
-								<li>
-									<a href="/documentation/enduser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;For end users</a>
-								</li>
-								<li class="active">
-									<a href="/documentation/sysadmin.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a>
-								</li>
-								<li>
-									<a href="/documentation/developer.html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="/security.html"><span class="glyphicon glyphicon-lock"></span>&nbsp;Security</a>
-						</li>
-						<li>
-							<a href="https://github.com/SwiperProxy/swiperproxy"><span class="glyphicon glyphicon-export"></span>&nbsp;Version control</a>
-						<li>
-						<li>
-							<a href="https://github.com/SwiperProxy/swiperproxy/issues"><span class="glyphicon glyphicon-align-left"></span>&nbsp;Issue Tracker</a>
-						</li>
-						<li>
-							<a href="https://travis-ci.org/SwiperProxy/swiperproxy"><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;Build status</a>
-						</li>
-						<li>
-							<a href="/donate.html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a>
-						</li>
-						<li>
-							<a href="/contact.html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact</a>
-						</li>
-						
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="container">
-			<h1>Generating an x.509 certificate</h1>
-			<p>An x.509 is required if you want to use HTTP over TLS (HTTPS) in any capacity. This is obviously running SwiperProxy towards clients with HTTPS support, but also connecting to destination servers required an x.509 certificate.</p>
-			<p>Generating one is easily done with OpenSSL. First, you should make sure you have somewhere to store certificate signing requests:<br/><code>$ mkdir /etc/ssl/csr</code></p>
-			<p>Next, generate a private key and CSR:<br/><code>$ openssl req -new -newkey rsa:4096 -nodes -sha512 -out /etc/ssl/csr/proxy.example.org.csr -keyout /etc/ssl/private/proxy.example.org.key</code></p>
-			<p>You will be prompted to fill in the information that will be embedded in your CSR. It is highly recommended that you fill this in truthfully. Using a period <code>.</code> inputs <code>NULL</code>, e.g. if you do not have an organisation. For example:<br/><code>Country Name (2 letter code) [AU]:AU</code><br/><code>State or Province Name (full name) [Some-State]:ACT</code><br/><code>Locality Name (eg, city) []: Sydney</code><br/><code>Organization Name (eg, company) [Internet Widgits Pty Ltd]:.</code><br/><code>Organizational Unit Name (eg, section) []:.</code><br/><code>Common Name (e.g. server FQDN or YOUR name) []:proxy.example.org</code><br/><code>Email Address []:hostmaster@example.org</code></p>
-			<p>It is recommended you do not use a challenge password. Company name is as stated, optional.</p>
-			<p>You may want to get your certificate signed by a trusted CA. In this case, you will need to submit the CSR you just generated to your CA. You will be returned a certificate that you should place in <code>/etc/ssl/certs</code>.</p>
-			<p>If you want to self-sign your certificate:<br/><code>$ openssl x509 -req -sha512 -days 365 -in /etc/ssl/csr/proxy.example.org.csr -signkey /etc/ssl/private/proxy.example.org.key -out /etc/ssl/certs/proxy.example.org.pem</code></p>
-			<p>Either way, to use the certificate, it must be readable by the SwiperProxy user, and in a format that SwiperProxy will understand. To do this, concatenate the private key, certificate and any intermediate certificates (in signing order) and make the file readable by the SwiperProxy user. For example:<br/><code>$ cp /etc/ssl/private/proxy.example.org.key /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</code><br/><code>$ cat /etc/ssl/certs/proxy.example.org.pem > /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</code><br/><code>$ cat /etc/ssl/certs/ca.intermediate.cert.pem > /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</code><br/><code>$ chown swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</code><br/><code>$ chmod 400 /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</code></p>
-			<p><p>See <code>man openssl</code> for more information.</p>
-			<hr/>
-			<footer>
-				<p><a href="https://creativecommons.org/licenses/by/4.0/"><img src="../img/80x15.png" alt="CC-BY 4.0"/></a> <small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small><br/><img src="../img/freesoftware.png" alt="Free Software"/>&nbsp;<img src="../img/opensource.png" alt="Open Source"/>&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md"><img src="../img/mitlicense.png" alt="MIT License"/></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md">MIT license</a>.</small></p>
-			</footer>
-		</div>
-		<script src="../js/vendor/jquery/jquery-2.1.1.min.js"></script>
-		<script>window.jQuery || document.write('<script src="../js/vendor/jquery/jquery-2.1.1.min.js"><\/script>')</script>
-		<script src="../js/vendor/bootstrap/bootstrap.min.js"></script>
-	</body>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Generating an x.509 certificate | SwiperProxy</title>
+    <meta content="The SwiperProxy Team" name="author">
+    <meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
+    <meta content="swiperproxy,swiper,proxy,web,python,http,https" name="keywords">
+    <link href="../humans.txt" rel="author" type="text/plain">
+    <link href="../css/vendor/bootswatch/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/swiperproxy.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="../index.html" title="SwiperProxy" type="text/html">SwiperProxy</a>
+          <button class="navbar-toggle collapsed" type="button" data-target="#navbar-main" data-toggle="collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li><a href="../download.html" title="Download" type="text/html"><span class="glyphicon glyphicon-save"></span>&nbsp;Download</a></li>
+            <li><a href="../quickstart.html" title="Quick-start" type="text/html"><span class="glyphicon glyphicon-file"></span>&nbsp;Quick-start</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Documentation" id="documentation"><span class="glyphicon glyphicon-book"></span>&nbsp;Documentation <span class="caret"></span></a>
+              <ul aria-labelledby="documentation" class="dropdown-menu">
+                <li><a href="sysadmin.html" title="Documentation for system administrators" type="text/html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a></li>
+                <li><a href="developer.html" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a></li>
+              </ul>
+            </li>
+            <li><a href="../security.html" title="Security" type="text/html"><span class="glyphicon glyphicon-lock"></span>&nbsp;Security</a></li>
+            <li><a href="https://github.com/SwiperProxy/swiperproxy" target="_blank" title="Version control" type="text/html"><span class="glyphicon glyphicon-export"></span>&nbsp;Version control</a></li>
+            <li><a href="https://github.com/SwiperProxy/swiperproxy/issues" target="_blank" title="Issue tracker" type="text/html"><span class="glyphicon glyphicon-align-left"></span>&nbsp;Issue Tracker</a></li>
+            <li><a href="../donate.html" title="Donate" type="text/html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a>
+            <li><a href="../contact.html" title="Contact" type="text/html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="container">
+      <article>
+        <h1>Generating an x.509 certificate</h1>
+        <hr>
+        <p>An x.509 is required if you want to use <abbr title="Hypertext Transport Protocol">HTTP</abbr> over <abbr title="Transport Layer Security">TLS</abbr> (<abbr title="HTTP Secure">HTTPS</abbr>) in any capacity. This is obviously running SwiperProxy towards clients with <abbr title="HTTP Secure">HTTPS</abbr> support, but also connecting to destination servers required an x.509 certificate.</p>
+        <p>Generating one is easily done with OpenSSL. First, you should make sure you have somewhere to store certificate signing requests:<br>
+        <kbd>$ mkdir /etc/ssl/csr</kbd></p>
+        <p>Next, generate a private key and <abbr title="Certificate Signing Request">CSR</abbr>:<br>
+        <kbd>$ openssl req -new -newkey rsa:4096 -nodes -sha512 -out /etc/ssl/csr/proxy.example.org.csr -keyout /etc/ssl/private/proxy.example.org.key</kbd></p>
+        <p>You will be prompted to fill in the information that will be embedded in your CSR. It is highly recommended that you fill this in truthfully. Using a period <kbd>.</kbd> inputs <code>NULL</code>, e.g. if you do not have an organisation. For example:<br>
+        <samp>Country Name (2 letter code) [AU]:</samp><kbd>AU</kbd><br>
+        <samp>State or Province Name (full name) [Some-State]:</samp><kbd>ACT</kbd><br>
+        <samp>Locality Name (eg, city) []:</samp><kbd>Sydney</kbd><br>
+        <samp>Organization Name (eg, company) [Internet Widgits Pty Ltd]:</samp><kbd>.</kbd><br>
+        <samp>Organizational Unit Name (eg, section) []:</samp><kbd>.</kbd><br>
+        <samp>Common Name (e.g. server FQDN or YOUR name) []:</samp><kbd>proxy.example.org</kbd><br>
+        <samp>Email Address []:</samp><kbd>hostmaster@example.org</kbd></p>
+        <p>It is recommended you do not use a challenge password. Company name is as stated, optional.</p>
+        <p>You may want to get your certificate signed by a trusted <abbr title="Certificate Authority">CA</abbr>. In this case, you will need to submit the <abbr title="Certificate Signing Request">CSR</abbr> you just generated to your <abbr title="Certificate Authority">CA</abbr>. You will be returned a certificate that you should place in <samp>/etc/ssl/certs</samp>.</p>
+        <p>If you want to self-sign your certificate:<br>
+        <kbd>$ openssl x509 -req -sha512 -days 365 -in /etc/ssl/csr/proxy.example.org.csr -signkey /etc/ssl/private/proxy.example.org.key -out /etc/ssl/certs/proxy.example.org.pem</kbd></p>
+        <p>Either way, to use the certificate, it must be readable by the SwiperProxy user, and in a format that SwiperProxy will understand. To do this, concatenate the private key, certificate and any intermediate certificates (in signing order) and make the file readable by the SwiperProxy user. For example:<br>
+        <kbd>$ cp /etc/ssl/private/proxy.example.org.key /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</kbd><br>
+        <kbd>$ cat /etc/ssl/certs/proxy.example.org.pem > /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</kbd><br>
+        <kbd>$ cat /etc/ssl/certs/ca.intermediate.cert.pem > /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</kbd><br>
+        <kbd>$ chown swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</kbd><br>
+        <kbd>$ chmod 400 /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</kbd></p>
+        <p>See <kbd>man openssl</kbd> for more information.</p>
+      </article>
+    </main>
+    <footer class="container">
+      <hr>
+      <p>
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html"><img alt="CC-BY 4.0" src="../img/80x15.png"></a>&nbsp;<small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html">Creative Commons Attribution 4.0 International License</a>.</small><br>
+        <img alt="Free Software" src="../img/freesoftware.png">&nbsp;<img alt="Open Source" src="../img/opensource.png">&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><img alt="MIT License" src="../img/mitlicense.png"></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><abbr title="Massachusetts Institute of Technology">MIT</abbr> license</a>.</small>
+      </p>
+    </footer>
+    <script src="../js/vendor/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="../js/vendor/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+  </body>
 </html>

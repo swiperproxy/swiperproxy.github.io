@@ -1,124 +1,234 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-	<head>
-		<meta charset="utf-8">
-		<!--[if IE]>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<![endif]-->
-		<title>proxy.conf reference documentation</title>
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="../css/vendor/bootswatch/bootstrap.min.css">
-		<style>
-			body {
-				padding-top: 50px;
-				padding-bottom: 20px;
-			}
-		</style>
-	</head>
-	<body>
-		<!--[if lt IE 7]>
-			<p class="browsehappy">You are using an <strong>outdated</strong> browser. <a href="http://browsehappy.com/">Upgrade your browser</a> to improve your user experience.</p>
-		<![endif]-->
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/index.html">SwiperProxy</a>
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				<div class="collapse navbar-collapse" id="navbar-main">
-					<ul class="nav navbar-nav">
-						<li>
-							<a href="/download.html"><span class="glyphicon glyphicon-save"></span>&nbsp;Download</a>
-						</li>
-						<li>
-							<a href="/quickstart.html"><span class="glyphicon glyphicon-file"></span>&nbsp;Quick-start</a>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="documentation"><span class="glyphicon glyphicon-book"></span>&nbsp;Documentation <span class="caret"></span></a>
-							<ul class="dropdown-menu" aria-labelledby="documentation">
-								<li>
-									<a href="/documentation/enduser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;For end users</a>
-								</li>
-								<li class="active">
-									<a href="/documentation/sysadmin.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a>
-								</li>
-								<li>
-									<a href="/documentation/developer.html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="/security.html"><span class="glyphicon glyphicon-lock"></span>&nbsp;Security</a>
-						</li>
-						<li>
-							<a href="https://github.com/SwiperProxy/swiperproxy"><span class="glyphicon glyphicon-export"></span>&nbsp;Version control</a>
-						<li>
-						<li>
-							<a href="https://github.com/SwiperProxy/swiperproxy/issues"><span class="glyphicon glyphicon-align-left"></span>&nbsp;Issue Tracker</a>
-						</li>
-						<li>
-							<a href="https://travis-ci.org/SwiperProxy/swiperproxy"><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;Build status</a>
-						</li>
-						<li>
-							<a href="/donate.html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a>
-						</li>
-						<li>
-							<a href="/contact.html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact</a>
-						</li>
-						
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="container">
-			<h1>proxy.conf reference documentation</h1>
-			<hr/>
-			<p><code>[global]</code><br/>Indicates that we are defining global configuration, rather than <a href="#rewrites">rewrites</a>.</p>
-			<hr/>
-			<h2>Server settings</h2>
-			<p><code>hostname</code> <mark>string</mark> (domain)<br/>The DNS-address your proxy resides on. This is used to correctly rewrite URLs. This can be an A/AAAA or CNAME record. It is recommended that you also generate a lower level wildcard record. For example, if your proxy lives at <code>proxy.example.org</code>, that you also have a <code>*.proxy.example.org</code> record to handle old-style rewrites in the form of <code>www.google.com.proxy.example.org</code>. While this style is deprecated because of x.509 certificate issues, it is still supported by the proxy and will rewrite to use the proper domain.</p>
-			<p><code>http_listen_port</code> <mark>integer</mark> 0-65535<br/>The port to listen on for HTTP connections. This is the port your users will connect to, e.g., if your proxy binds to 8080, your users will connect to proxy.example.org:8080. If you are using a HTTPD and are using a <a href="#">reverse proxy</a>, the HTTPD should reverse proxy to this port. Keep in mind that <a href="#">CAP_NET_BIND_SERVICE</a> is required to bind to privileged ports (below 1024).</p>
-			<p><code>https_listen_port</code> <mark>integer</mark> 0-65535<br/>The port to listen on for HTTP connections. This is the port your users will connect to, e.g., if your proxy binds to 40443, your users will connect to proxy.example.org:40443. If you are using a HTTPD and are using a <a href="#">reverse proxy</a>, the HTTPD should reverse proxy to this port. Keep in mind that <a href="#">CAP_NET_BIND_SERVICE</a> is required to bind to privileged ports (below 1024).</p>
-			<p><code>https_certificate</code> <mark>string</mark> /path/to/file.pem<br/>The certificate that is used for HTTPS connections, both between the client and the proxy, and the proxy and destination server. This file should be PEM-encoded, and contain both the private key and certificate, optionally followed by any intermediate signing certificates. This file should be readable by the user with which you run SwiperProxy.</p>
-			<hr/>
-			<h2>Optimization settings</h2>
-			<p><code>threadpool_size</code> <mark>integer</mark> amount<br/>The number of request handler threads.</p>
-			<p><code>max_post_size</code> <mark>integer</mark> in bytes<br/>The maximum post size in bytes. Post sizes exceeding this value will be dropped.</p>
-			<p><code>max_page_size</code> <mark>integer</mark> in bytes<br/>The maximum page size in bytes. Page sizes exceeding this value will be dropped.</p>
-			<p><code>gzip_level</code> <mark>integer</mark> 0-9<br/>GZIP compression level the proxy will use. While this is very useful, considering the potential traffic passing through a proxy, it is also a security risk when using HTTPS. For more information, see <a href="https://en.wikipedia.org/wiki/CRIME">CRIME</a> and <a href="https://en.wikipedia.org/wiki/BREACH_%28security_exploit%29">BREACH</a>. 0 disables GZIP compression entirely.</p>
-			<p><code>gzip_client_response</code> <mark>boolean</mark> yes/no<br/>Whether to compress responses to clients, if using GZIP compression levels of 1 or higher. Disabling will only use GZIP compression if applicable for the connection between proxy and destination server.</p>
-			<p><code>upstream_timeout</code> <mark>integer</mark> in seconds<br/>The read/write timeout in seconds of servers your users try to connect to through your proxy.</p>
-			<p><code>upstream_connect_timeout</code> <mark>integer</mark> in seconds<br/>The connect timeout in seconds of servers your users try to connect to through your proxy.</p>
-			<p><code>client_timeout</code> <mark>integer</mark> in seconds<br/>The read/write timeout in seconds of your clients.</p>
-			<p><code>client_resolve</code> <mark>boolean</mark> yes/no<br/>Attempt to resolve the reverse DNS (PTR-record) of your client IP addresses before writing to log? This incurs a performance loss depending on your resolver.</p>
-			<hr/>
-			<h2>Miscellaneous</h2>
-			<p><code>files_location</code> <mark>string</mark> /path/to/htdocs<br/>The full path of the static HTML files served when users visit your proxy directly. This directory and its files should be readable by the SwiperProxy user.</p>
-			<p><code>filter_headers</code> <mark>string</mark> comma,separated,headers<br/>A comma-separated list of client headers the proxy should filter.</p>
-			<p><code>block_robots</code> <mark>boolean</mark> yes/no<br/>Whether to inject a faked robots.txt to discourage crawlers to index your proxy. This will override the robots.txt file of destination servers.</p>
-			<p><code>use_forwarded_for</code> <mark>boolean</mark> yes/no<br/>Add an X-Forwarded-For header containing the client's IP address?</p>
-			<p><code>block_list</code> <mark>string</mark> /path/to/file.txt<br/>The location of a plain text blocklist. Users cannot browse to destinations with an entry in this file.</p>
-			<p><code>block_target</code> <mark>string</mark> http://example.tld/blocked.html</br/>When users browse to a domain with a blocklist entry, users will be rewritten to this page instead.</p>
-			<p><code>access_log</code> <mark>string</mark> /path/to/file.log</br/> The location of the access log. This file should be writable by the SwiperProxy user.</p>
-			<p><code>error_log</code> <mark>string</mark> /path/to/file.log<br/> The location of the error log. This file should be writable by the SwiperProxy user.</p>
-			<hr/>
-			<p><code>[rewrites]</code><br/>Indicates that all following entries are rewrites. Useful for rewriting users to a specific destination, or loadbalancing between proxies.</p>
-			<hr/>
-			<footer>
-				<p><a href="https://creativecommons.org/licenses/by/4.0/"><img src="../img/80x15.png" alt="CC-BY 4.0"/></a> <small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small><br/><img src="../img/freesoftware.png" alt="Free Software"/>&nbsp;<img src="../img/opensource.png" alt="Open Source"/>&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md"><img src="../img/mitlicense.png" alt="MIT License"/></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md">MIT license</a>.</small></p>
-			</footer>
-		</div>
-		<script src="../js/vendor/jquery/jquery-2.1.1.min.js"></script>
-		<script>window.jQuery || document.write('<script src="../js/vendor/jquery/jquery-2.1.1.min.js"><\/script>')</script>
-		<script src="../js/vendor/bootstrap/bootstrap.min.js"></script>
-	</body>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>proxy.conf reference documentation | SwiperProxy</title>
+    <meta content="The SwiperProxy Team" name="author">
+    <meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
+    <meta content="swiperproxy,swiper,proxy,web,python,http,https" name="keywords">
+    <link href="../humans.txt" rel="author" type="text/plain">
+    <link href="../css/vendor/bootswatch/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/swiperproxy.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="../index.html" title="SwiperProxy" type="text/html">SwiperProxy</a>
+          <button class="navbar-toggle collapsed" type="button" data-target="#navbar-main" data-toggle="collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li><a href="../download.html" title="Download" type="text/html"><span class="glyphicon glyphicon-save"></span>&nbsp;Download</a></li>
+            <li><a href="../quickstart.html" title="Quick-start" type="text/html"><span class="glyphicon glyphicon-file"></span>&nbsp;Quick-start</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Documentation" id="documentation"><span class="glyphicon glyphicon-book"></span>&nbsp;Documentation <span class="caret"></span></a>
+              <ul aria-labelledby="documentation" class="dropdown-menu">
+                <li><a href="sysadmin.html" title="Documentation for system administrators" type="text/html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a></li>
+                <li><a href="developer.html" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a></li>
+              </ul>
+            </li>
+            <li><a href="../security.html" title="Security" type="text/html"><span class="glyphicon glyphicon-lock"></span>&nbsp;Security</a></li>
+            <li><a href="https://github.com/SwiperProxy/swiperproxy" target="_blank" title="Version control" type="text/html"><span class="glyphicon glyphicon-export"></span>&nbsp;Version control</a></li>
+            <li><a href="https://github.com/SwiperProxy/swiperproxy/issues" target="_blank" title="Issue tracker" type="text/html"><span class="glyphicon glyphicon-align-left"></span>&nbsp;Issue Tracker</a></li>
+            <li><a href="../donate.html" title="Donate" type="text/html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a>
+            <li><a href="../contact.html" title="Contact" type="text/html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="container">
+      <article>
+        <h1>proxy.conf reference documentation</h1>
+        <hr>
+        <p><code>[global]</code><br>
+        Indicates that we are defining global configuration, rather than <a href="#rewrites">rewrites</a>.</p>
+        <hr>
+        <table>
+          <caption>Server settings</caption>
+          <thead>
+            <tr>
+              <th>Directive</th>
+              <th>Data type</th>
+              <th>Expected input</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><var>hostname</var></td>
+              <td>string</td>
+              <td>domain</td>
+              <td>The <abbr title="Domain Name System">DNS</abbr>-address your proxy resides on. This is used to correctly rewrite <abbr title="Uniform Resource Locator">URL</abbr>s. This can be an <abbr title="Address">A</abbr>/AAAA or <abbr title="Canonical Name">CNAME</abbr> record. It is recommended that you also generate a lower level wildcard record. For example, if your proxy lives at <strong>proxy.example.org</strong>, that you also have a <strong>*.proxy.example.org</strong> record to handle old-style rewrites in the form of <strong>www.google.com.proxy.example.org</strong>. While this style is deprecated because of x.509 certificate issues, it is still supported by the proxy and will rewrite to use the proper domain.</td>
+            </tr>
+            <tr>
+              <td><var>http_listen_port</var></td>
+              <td>integer</td>
+              <td>0-65535</td>
+              <td>The port to listen on for <abbr title="Hypertext Transport Protocol">HTTP</abbr> connections. This is the port your users will connect to, e.g., if your proxy binds to 8080, your users will connect to <strong>proxy.example.org:8080</strong>. If you are using a webserver and are using a reverse proxy, the HTTPD should reverse proxy to this port. Keep in mind that <var><a href="sys-libcap.html" title="CAP_NET_BIND_SERVICE" type="text/html">CAP_NET_BIND_SERVICE</a></var> is required to bind to privileged ports (&lt; 1024).</td>
+            </tr>
+            <tr>
+              <td><var>https_listen_port</var></td>
+              <td>integer</td>
+              <td>0-65535</td>
+              <td>The port to listen on for <abbr title="HTTP Secure">HTTPS</abbr> connections. This is the port your users will connect to, e.g., if your proxy binds to 40443, your users will connect to <strong>proxy.example.org:40443</strong>. If you are using a webserver and are using a reverse proxy, the HTTPD should reverse proxy to this port. Keep in mind that <var><a href="sys-libcap.html" title="CAP_NET_BIND_SERVICE" type="text/html">CAP_NET_BIND_SERVICE</a></var> is required to bind to privileged ports (&lt; 1024).</td>
+            </tr>
+            <tr>
+              <td><var>https_certificate</var></td>
+              <td>string</td>
+              <td>/path/to/file.pem</td>
+              <td>The certificate that is used for <abbr title="HTTP Secure">HTTPS</abbr> connections, both between the client and the proxy, and the proxy and destination server. This file should be base64 <abbr title="Distinguished Encoding Rules">DER</abbr>-encoded, and contain both the private key and certificate, optionally followed by any intermediate signing certificates. This file should be readable by the user with which you run SwiperProxy.</td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <table>
+          <caption>Optimization settings</caption>
+          <thead>
+            <tr>
+              <th>Directive</th>
+              <th>Data type</th>
+              <th>Expected input</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><var>threadpool_size</var></td>
+              <td>integer</td>
+              <td>amount</td>
+              <td>The number of request handler threads.</td>
+            </tr>
+            <tr>
+              <td><var>max_post_size</var></td>
+              <td>integer</td>
+              <td>in bytes</td>
+              <td>The maximum post size in bytes. Post sizes exceeding this value will be dropped.</td>
+            </tr>
+            <tr>
+              <td><var>max_page_size</var></td>
+              <td>integer</td>
+              <td>in bytes</td>
+              <td>The maximum page size in bytes. Page sizes exceeding this value will be dropped.</td>
+            </tr>
+            <tr>
+              <td><var>gzip_level</var></td>
+              <td>integer</td>
+              <td>0-9</td>
+              <td>GZIP compression level the proxy will use. While this is very useful, considering the potential traffic passing through a proxy, it is also a security risk when using <abbr title="HTTP Secure">HTTPS</abbr>. For more information, see <abbr title="Compression Ratio Info-leak Made Easy"><a href="https://en.wikipedia.org/wiki/CRIME" target="_blank" title="CRIME" type="text/html">CRIME</a></abbr> and <abbr title="Browser Reconnaissance and Exfiltration via Adaptive Compression of Hypertext"><a href="https://en.wikipedia.org/wiki/BREACH_%28security_exploit%29" target="_blank" title="BREACH" type="text/html">BREACH</a></abbr>. 0 disables GZIP compression entirely.</td>
+            </tr>
+            <tr>
+              <td><var>gzip_client_response</var></td>
+              <td>boolean</td>
+              <td>yes/no</td>
+              <td>Whether to compress responses to clients, if using GZIP compression levels of 1 or higher. Disabling will only use GZIP compression if applicable for the connection between proxy and destination server.</td>
+            </tr>
+            <tr>
+              <td><var>upstream_timeout</var></td>
+              <td>integer</td>
+              <td>in seconds</td>
+              <td>The read/write timeout in seconds of servers your users try to connect to through your proxy.</td>
+            </tr>
+            <tr>
+              <td><var>upstream_connect_timeout</var></td>
+              <td>integer</td>
+              <td>in seconds</td>
+              <td>The connect timeout in seconds of servers your users try to connect to through your proxy.</td>
+            </tr>
+            <tr>
+              <td><var>client_timeout</var></td>
+              <td>integer</td>
+              <td>in seconds</td>
+              <td>The read/write timeout in seconds of your clients.</td>
+            </tr>
+            <tr>
+              <td><var>client_resolve</var></td>
+              <td>boolean</td>
+              <td>yes/no</td>
+              <td>Attempt to resolve the reverse <abbr title="Domain Name System">DNS</abbr> (<abbr title="Pointer">PTR</abbr>-record) of your client <abbr title="Internet Protocol">IP</abbr> addresses before writing to log? This incurs a performance loss depending on your resolver.</td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <table>
+          <caption>Miscellaneous</caption>
+          <thead>
+            <tr>
+              <th>Directive</th>
+              <th>Data type</th>
+              <th>Expected input</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><var>files_location</var></td>
+              <td>string</td>
+              <td>/path/to/htdocs</td>
+              <td>The full path of the static HTML files served when users visit your proxy directly. This directory and its files should be readable by the SwiperProxy user.</td>
+            </tr>
+            <tr>
+              <td><var>filter_headers</var></td>
+              <td>string</td>
+              <td>comma,separated,headers</td>
+              <td>A comma-separated list of client headers the proxy should filter.</td>
+            </tr>
+            <tr>
+              <td><var>block_robots</var></td>
+              <td>boolean</td>
+              <td>yes/no</td>
+              <td>Whether to inject a faked robots.txt to discourage crawlers to index your proxy. This will override the robots.txt file of destination servers.</td>
+            </tr>
+            <tr>
+              <td><var>use_forwarded_for</var></td>
+              <td>boolean</td>
+              <td>yes/no</td>
+              <td>Add an X-Forwarded-For header containing the client's <abbr title="Internet Protocol">IP</abbr> address?</td>
+            </tr>
+            <tr>
+              <td><var>block_list</var></td>
+              <td>string</td>
+              <td>/path/to/file.txt</td>
+              <td>The location of a plain text blocklist. Users cannot browse to destinations with an entry in this file.</td>
+            </tr>
+            <tr>
+              <td><var>block_target</var></td>
+              <td>string</td>
+              <td>http://example.tld/blocked.html</td>
+              <td>When users browse to a domain with a blocklist entry, users will be rewritten to this page instead</td>
+            </tr>
+            <tr>
+              <td><var>access_log</var></td>
+              <td>string</td>
+              <td>/path/to/file.log</td>
+              <td>The location of the access log. This file should be writable by the SwiperProxy user.</td>
+            </tr>
+            <tr>
+              <td><var>error.log</var></td>
+              <td>string</td>
+              <td>/path/to/file.log</td>
+              <td>The location of the error log. This file should be writable by the SwiperProxy user.</td>
+            </tr>
+          </tbody>
+        </table>
+        <hr>
+        <p id="rewrites"><code>[rewrites]</code><br>
+        Indicates that all following entries are rewrites. Useful for rewriting users to a specific destination, or loadbalancing between proxies.</p>
+      </article>
+    </main>
+    <footer class="container">
+      <hr>
+      <p>
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html"><img alt="CC-BY 4.0" src="../img/80x15.png"></a>&nbsp;<small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html">Creative Commons Attribution 4.0 International License</a>.</small><br>
+        <img alt="Free Software" src="../img/freesoftware.png">&nbsp;<img alt="Open Source" src="../img/opensource.png">&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><img alt="MIT License" src="../img/mitlicense.png"></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><abbr title="Massachusetts Institute of Technology">MIT</abbr> license</a>.</small>
+      </p>
+    </footer>
+    <script src="../js/vendor/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="../js/vendor/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+  </body>
 </html>

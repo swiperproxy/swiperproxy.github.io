@@ -1,179 +1,158 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-	<head>
-		<meta charset="utf-8">
-		<!--[if IE]>
-			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<![endif]-->
-		<title>Quick-start | SwiperProxy</title>
-		<meta name="description" content="">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="css/vendor/bootswatch/bootstrap.min.css">
-		<style>
-			body {
-				padding-top: 50px;
-				padding-bottom: 20px;
-			}
-		</style>
-	        <script src="js/vendor/modernizr/modernizr-latest.js"></script>
-		<script src="js/vendor/angular/angular.min.js"></script>
-	</head>
-	<body>
-		<!--[if lt IE 7]>
-			<p class="browsehappy">You are using an <strong>outdated</strong> browser. <a href="http://browsehappy.com/">Upgrade your browser</a> to improve your user experience.</p>
-		<![endif]-->
-		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-			<div class="container">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="/index.html">SwiperProxy</a>
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-				</div>
-				<div class="collapse navbar-collapse" id="navbar-main">
-					<ul class="nav navbar-nav">
-						<li>
-							<a href="/download.html"><span class="glyphicon glyphicon-save"></span>&nbsp;Download</a>
-						</li>
-						<li class="active">
-							<a href="/quickstart.html"><span class="glyphicon glyphicon-file"></span>&nbsp;Quick-start</a>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="documentation"><span class="glyphicon glyphicon-book"></span>&nbsp;Documentation <span class="caret"></span></a>
-							<ul class="dropdown-menu" aria-labelledby="documentation">
-								<li>
-									<a href="/documentation/enduser.html"><span class="glyphicon glyphicon-user"></span>&nbsp;For end users</a>
-								</li>
-								<li>
-									<a href="/documentation/sysadmin.html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a>
-								</li>
-								<li>
-									<a href="/documentation/developer.html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<a href="/security.html"><span class="glyphicon glyphicon-lock"></span>&nbsp;Security</a>
-						</li>
-						<li>
-							<a href="https://github.com/SwiperProxy/swiperproxy"><span class="glyphicon glyphicon-export"></span>&nbsp;Version control</a>
-						<li>
-						<li>
-							<a href="https://github.com/SwiperProxy/swiperproxy/issues"><span class="glyphicon glyphicon-align-left"></span>&nbsp;Issue Tracker</a>
-						</li>
-						<li>
-							<a href="https://travis-ci.org/SwiperProxy/swiperproxy"><span class="glyphicon glyphicon-ok-sign"></span>&nbsp;Build status</a>
-						</li>
-						<li>
-							<a href="/donate.html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a>
-						</li>
-						<li>
-							<a href="/contact.html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact</a>
-						</li>
-						
-					</ul>
-				</div>
-			</div>
-		</nav>
-		<div class="container">
-			<h1>Quick-start guide <small>to get up and running within minutes</small></h1>
-			<p>SwiperProxy has few dependencies and can be installed in practically all major distributions.</p> 
-			<hr/>
-			<h2>Dependencies</h2>
-			<ul>
-				<li><a href="#">Bootstrap</a>, 2.0.2 or higher</li>
-				<li><a href="#">JQuery</a>, 1.7.2 or higher</li>
-				<li><a href="#">Modernizr</a>, 2.6.2 or higher</li>
-				<li><a href="#">Python</a>, 2.7 or higher</li>
-				<li><a href="#">Python IPY</a>, 0.75 or higher</li>
-				<li><a href="#">streamhtmlparser</a>, 0.1 or higher</li>
-			</ul> 
-			<hr/>
-			<h2>Installing</h2>
-			<div class="alert alert-info" role="alert">
-				<p><span class="glyphicon glyphicon-comment"></span> This makes some assumptions about your preferences towards retrieval method, wget vs curl, etc. You may want to look at the <a href="/documentation/sysadmin.html">detailed documentation</a>.
-			</div>
-			<p>Select your distribution:</p>
-			<div ng-app id="ng-app">
-				<ul>
-					<li><a href="#" ng-model="debian" ng-click="debian=!debian">Debian 7 Wheezy</a></li>
-				</ul>
-				<div ng-show="debian">
-					<hr/>
-					<h3>Debian 7 Wheezy</h3>
-					<p>Install the dependencies available from the stable repository:<br/>
-					<code>$ apt-get install build-essential cython libcap2-bin libjs-jquery python python-dev python-ipy sudo wget</code></p>
-					<p>Install the Modernizr library manually as it is not yet available in stable:<br/>
-					<code>$ mkdir /usr/local/share/javascript</code><br/>
-					<code>$ mkdir /usr/local/share/javascript/modernizr</code><br/>
-					<code>$ wget http://modernizr.com/downloads/modernizr-latest.js \</code><br/>
-					<code>-O /usr/local/share/javascript/modernizr/modernizr.min.js</code><br/>
-					<code>$ ln -s /usr/local/share/javascript/modernizr /usr/share/javascript/modernizr</code></p>
-					<p>Install the Bootstrap library manually as well:<br/>
-					<code>$ wget https://github.com/twbs/bootstrap/releases/download/v3.3.1/bootstrap-3.3.1-dist.zip \</code><br/>
-					<code>-O /usr/local/src/bootstrap-3.3.1-dist.zip</code><br/>
-					<code>$ unzip /usr/local/src/bootstrap-3-3.1.zip</code><br/>
-					<code>$ mv /usr/local/src/dist /usr/local/share/bootstrap</code><br/>
-					<code>$ ln -s /usr/local/share/bootstrap /usr/share/bootstrap</code></p>
-					<p>Download and extract SwiperProxy:<br/>
-					<code>$ mkdir /opt/SwiperProxy</code><br/>
-					<code>$ wget https://github.com/SwiperProxy/swiperproxy/archive/swiperproxy-1.0.tar.gz \</code><br/>
-					<code>-O /usr/local/src/swiperproxy-1.0.tar.gz</code><br/>
-					<code>$ tar -zxvf /usr/local/src/swiperproxy-1.0.tar.gz</code><br/>
-					<code>$ mv /usr/local/src/swiperproxy /opt/SwiperProxy/swiperproxy</code></p>
-					<p>Symlink the JavaScript and Bootstrap libraries so SwiperProxy can access them:<br/>
-					<code>$ ln -s /usr/share/javascript /opt/SwiperProxy/swiperproxy/swiperproxy/htdocs/javascript</code><br/>
-					<code>$ ln -s /usr/share/bootstrap /opt/SwiperProxy/swiperproxy/swiperproxy/htdocs/bootstrap</code></p>
-					<p>Compile streamhtmlparser and its Python module:<br/>
-					<code>$ cd /opt/SwiperProxy/swiperproxy/streamhtmlparser</code><br/>
-					<code>$ ./configure</code><br/>
-					<code>$ make</code><br/>
-					<code>$ make install</code><br/>
-					<code>$ cd src/py-streamhtmlparser</code><br/>
-					<code>$ make</code><br/>
-					<code>$ make install</code></p>
-					<p>Copy the Python packages to a location where Debian will recognize them:<br/>
-					<code>$ cp /usr/local/lib/python2.7/dist-packages/* /usr/lib/python2.7/dist-packages</code><br/>
-					<code>$ ldconfig -v</code></p>
-					<p>Create the runtime environment and add an unprivileged user:<br/>
-					<code>$ mkdir /var/log/swiperproxy</code><br/>
-					<code>$ addgroup --system swiperproxy</code><br/>
-					<code>$ adduser --system swiperproxy --ingroup=swiperproxy --home=/opt/SwiperProxy/swiperproxy/swiperproxy</code><br/>
-					<code>$ chown swiperproxy:swiperproxy /var/log/swiperproxy</code><br/>
-					<code>$ chown swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy/swiperproxy</code></p>
-					<p>Give <code>CAP_NET_BIND_SERVICE</code> to <code>Proxy.py</code> so it can bind to privileged ports (below 1024):<br/>
-					<code>$ setcap 'cap_net_bind_service=+ep' /opt/SwiperProxy/swiperproxy/swiperproxy/Proxy.py</code></p>
-				</div>
-			</div>
-			<hr/>
-			<h2>Configuring</h2>
-			<p>All configuration is done in the <code>proxy.conf</code> configuration file. A default configuration file detailing each configuration option is supplied.</p>
-			<p>The most important settings are:</p>
-			<ul>
-				<li><code>http_listen_port</code>, <code>https_listen_port</code>: The HTTP and HTTPS ports the proxy will listen on. You can configure the listen ports to be 80 and 443 and let users access the proxy directly by using <a href="/documentation/sys-libcap.html">libcap</a>. You can also place a <a href="#">reverse proxy</a> in-front of SwiperProxy. In that case, the listen ports should be different.</li>
-				<li><code>http_port</code>, <code>https_port</code>: These are the ports the proxy is reachable on from the outside. They may be different from the listen addresses, for example in case of a <a href="#">reverse proxy</a>.</li>
-				<li><code>https_certificate</code>: A PEM file that contains the SwiperProxy x.509 certificate, if necessary an intermediate CA certificate and the private key.</li>
-				<li><code>hostname</code>: The hostname SwiperProxy is reachable on.</li>
-				<li><code>block_robots</code>: If you want to ensure that web spiders/crawlers do not try to crawl the entire internet through your proxy, you can set this setting to yes.</li>
-				<li><code>[rewrites]:</code>: Under this section, you can add custom rewrites for specific hostnames. The syntax is <code>hostname=newhostname</code>. For instances, if you want to ensure that http://www.example.org/ does not pass through the proxy, you could create the following rewrite: <code>www.example.org=www.example.org</code>. You can also rewrite a specific hostname to pass through a different proxy: <code>www.example.org=proxy2.example.com/www.example.org</code>.</li>
-			</ul>
-			<p>As a final configuration step, you will need to edit the index.html file found in the html directory. Change the example hostname found in that file to your selected hostname. Of course you can also apply custom styling, change the logo, etc.</p>
-			<p>You may want to optionally add a wildcard DNS-record to your proxy, e.g. <code>IN A *.proxy.example.org</code>. This allows people to also browse to, for example, http://example.org.proxy.yourdomain.tld which will be rewritten to http://proxy.yourdomain.tld/example.org. This works, even when forcing HTTPS, though will likely always throw a certificate warning.</p>
-			<hr/>
-			<h2>Running SwiperProxy</h2>
-			<p><code>sudo -u swiperproxy python Proxy.py -c proxy.conf</code> or <a href="#">run as a daemon</a>.</p>
-			<footer>
-				<p><a href="https://creativecommons.org/licenses/by/4.0/"><img src="img/80x15.png" alt="CC-BY 4.0"/></a> <small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</small><br/><img src="img/freesoftware.png" alt="Free Software"/>&nbsp;<img src="img/opensource.png" alt="Open Source"/>&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md"><img src="img/mitlicense.png" alt="MIT License"/></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md">MIT license</a>.</small></p>
-			</footer>
-		</div>
-		<script src="js/vendor/jquery/jquery-2.1.1.min.js"></script>
-		<script>window.jQuery || document.write('<script src="js/vendor/jquery/jquery-2.1.1.min.js"><\/script>')</script>
-		<script src="js/vendor/bootstrap/bootstrap.min.js"></script>
-	</body>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>Quick-start | SwiperProxy</title>
+    <meta content="The SwiperProxy Team" name="author">
+    <meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
+    <meta content="swiperproxy,swiper,proxy,web,python,http,https" name="keywords">
+    <link href="humans.txt" rel="author" type="text/plain">
+    <link href="css/vendor/bootswatch/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="css/swiperproxy.css" rel="stylesheet" type="text/css">
+    <script src="js/vendor/angular/angular.min.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="index.html" title="SwiperProxy" type="text/html">SwiperProxy</a>
+          <button class="navbar-toggle collapsed" type="button" data-target="#navbar-main" data-toggle="collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-main">
+          <ul class="nav navbar-nav">
+            <li><a href="download.html" title="Download" type="text/html"><span class="glyphicon glyphicon-save"></span>&nbsp;Download</a></li>
+            <li><a class="active" href="quickstart.html" title="Quick-start" type="text/html"><span class="glyphicon glyphicon-file"></span>&nbsp;Quick-start</a></li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Documentation" id="documentation"><span class="glyphicon glyphicon-book"></span>&nbsp;Documentation <span class="caret"></span></a>
+              <ul aria-labelledby="documentation" class="dropdown-menu">
+                <li><a href="documentation/sysadmin.html" title="Documentation for system administrators" type="text/html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a></li>
+                <li><a href="documentation/developer.html" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a></li>
+              </ul>
+            </li>
+            <li><a href="security.html" title="Security" type="text/html"><span class="glyphicon glyphicon-lock"></span>&nbsp;Security</a></li>
+            <li><a href="https://github.com/SwiperProxy/swiperproxy" target="_blank" title="Version control" type="text/html"><span class="glyphicon glyphicon-export"></span>&nbsp;Version control</a></li>
+            <li><a href="https://github.com/SwiperProxy/swiperproxy/issues" target="_blank" title="Issue tracker" type="text/html"><span class="glyphicon glyphicon-align-left"></span>&nbsp;Issue Tracker</a></li>
+            <li><a href="donate.html" title="Donate" type="text/html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a>
+            <li><a href="contact.html" title="Contact" type="text/html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <main class="container">
+      <article>
+        <h1>Quick-start guide <small>to get up and running within minutes</small></h1>
+        <p>SwiperProxy has few dependencies and can be installed in practically all major distributions.</p>
+        <hr>
+        <section>
+          <h2>Dependencies</h2>
+          <ul>
+            <li><a href="#" title="Bootstrap" type="text/html">Bootstrap</a>, 2.0.2 or higher</li>
+            <li><a href="#" title="JQuery" type="text/html">JQuery</a>, 1.7.2 or higher</li>
+            <li><a href="#" title="Modernizr" type="text/html">Modernizr</a>, 2.6.2 or higher</li>
+            <li><a href="#" title="Python" type="text/html">Python</a>, 2.7 or higher</li>
+            <li><a href="#" title="Python IPy" type="text/html">Python IPY</a>, 0.75 or higher</li>
+            <li><a href="#" title="streamhtmlparser" type="text/html">streamhtmlparser</a>, 0.1 or higher</li>
+          </ul>
+        </section>
+        <hr>
+        <section>
+          <h2>Installing</h2>
+          <aside class="alert alert-info" role="alert">
+            <p><span class="glyphicon glyphicon-comment"></span>&nbsp;This makes some assumptions about your preferences towards retrieval method, wget vs curl, etc. You may want to look at the <a href="/documentation/sysadmin.html">detailed documentation</a>.</p>
+          </aside>
+          <section>
+            <h3>Select your distribution:</h3>
+            <div ng-app id="ng-app">
+              <ul>
+                <li><a href="#" ng-click="debian=!debian" ng-model="debian">Debian 7 Wheezy</a></li>
+              </ul>
+              <div ng-show="debian">
+                <hr>
+                <section>
+                  <h3>Debian 7 Wheezy</h3>
+                  <p>Install the dependencies available from the stable repository:<br>
+                  <kbd>$ apt-get install build-essential cython libcap2-bin libjs-jquery python python-dev python-ipy sudo wget</kbd></p>
+                  <p>Install the Modernizr library manually as it is not yet available in stable:<br>
+                  <kbd>$ mkdir /usr/local/share/javascript</kbd><br>
+                  <kbd>$ mkdir /usr/local/share/javascript/modernizr</kbd><br>
+                  <kbd>$ wget http://modernizr.com/downloads/modernizr-latest.js \</kbd><br>
+                  <kbd>-O /usr/local/share/javascript/modernizr/modernizr.min.js</kbd><br>
+                  <kbd>$ ln -s /usr/local/share/javascript/modernizr /usr/share/javascript/modernizr</kbd></p>
+                  <p>Install the Bootstrap library manually as well:<br>
+                  <kbd>$ wget https://github.com/twbs/bootstrap/releases/download/v3.3.1/bootstrap-3.3.1-dist.zip \</kbd><br>
+                  <kbd>-O /usr/local/src/bootstrap-3.3.1-dist.zip</kbd><br>
+                  <kbd>$ unzip /usr/local/src/bootstrap-3-3.1.zip</kbd><br>
+                  <kbd>$ mv /usr/local/src/dist /usr/local/share/bootstrap</kbd><br>
+                  <kbd>$ ln -s /usr/local/share/bootstrap /usr/share/bootstrap</kbd></p>
+                  <p>Download and extract SwiperProxy:<br>
+                  <kbd>$ mkdir /opt/SwiperProxy</kbd><br>
+                  <kbd>$ wget https://github.com/SwiperProxy/swiperproxy/archive/swiperproxy-1.0.tar.gz \</kbd><br>
+                  <kbd>-O /usr/local/src/swiperproxy-1.0.tar.gz</kbd><br>
+                  <kbd>$ tar -zxvf /usr/local/src/swiperproxy-1.0.tar.gz</kbd><br>
+                  <kbd>$ mv /usr/local/src/swiperproxy /opt/SwiperProxy/swiperproxy</kbd></p>
+                  <p>Symlink the JavaScript and Bootstrap libraries so SwiperProxy can access them:<br>
+                  <kbd>$ ln -s /usr/share/javascript /opt/SwiperProxy/swiperproxy/swiperproxy/htdocs/javascript</kbd><br>
+                  <kbd>$ ln -s /usr/share/bootstrap /opt/SwiperProxy/swiperproxy/swiperproxy/htdocs/bootstrap</kbd></p>
+                  <p>Compile streamhtmlparser and its Python module:<br>
+                  <kbd>$ cd /opt/SwiperProxy/swiperproxy/streamhtmlparser</kbd><br>
+                  <kbd>$ ./configure</kbd><br>
+                  <kbd>$ make</kbd><br>
+                  <kbd>$ make install</kbd><br>
+                  <kbd>$ cd src/py-streamhtmlparser</kbd><br>
+                  <kbd>$ make</kbd><br>
+                  <kbd>$ make install</kbd></p>
+                  <p>Copy the Python packages to a location where Debian will recognize them:<br>
+                  <kbd>$ cp /usr/local/lib/python2.7/dist-packages/* /usr/lib/python2.7/dist-packages</kbd><br>
+                  <kbd>$ ldconfig -v</kbd></p>
+                  <p>Create the runtime environment and add an unprivileged user:<br>
+                  <kbd>$ mkdir /var/log/swiperproxy</kbd><br>
+                  <kbd>$ addgroup --system swiperproxy</kbd><br>
+                  <kbd>$ adduser --system swiperproxy --ingroup=swiperproxy --home=/opt/SwiperProxy/swiperproxy/swiperproxy</kbd><br>
+                  <kbd>$ chown swiperproxy:swiperproxy /var/log/swiperproxy</kbd><br>
+                  <kbd>$ chown swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy/swiperproxy</kbd></p>
+                  <p>Give <var>CAP_NET_BIND_SERVICE</var> to Proxy.py so it can bind to privileged ports (&lt; 1024):<br>
+                  <kbd>$ setcap 'cap_net_bind_service=+ep' /opt/SwiperProxy/swiperproxy/swiperproxy/Proxy.py</kbd></p>
+                </section>
+              </div>
+            </div>
+          </section>
+        </section>
+        <hr>
+        <section>
+          <h2>Configuring</h2>
+          <p>All configuration is done in the <strong>proxy.conf</strong> configuration file. A default configuration file detailing each configuration option is supplied.</p>
+          <p>The most important settings are:</p>
+          <ul>
+            <li><var>http_listen_port</var>, <var>https_listen_port</var>: The <abbr title="Hypertext Transfer Protocol">HTTP</abbr> and <abbr title="HTTP Secure">HTTPS</abbr> ports the proxy will listen on. You can configure the listen ports to be 80 and 443 and let users access the proxy directly by using <a href="/documentation/sys-libcap.html" title="libcap" type="text/html">libcap</a>. You can also place a <a href="#" title="Reverse proxy" type="text/html">reverse proxy</a> in-front of SwiperProxy. In that case, the listen ports should be different.</li>
+            <li><var>http_port</var>, <var>https_port</var>: These are the ports the proxy is reachable on from the outside. They may be different from the listen addresses, for example in case of a <a href="#" title="Reverse proxy" type="text/html">reverse proxy</a>.</li>
+            <li><var>https_certificate</var>: A Base64-encoded <abbr title="Distinguished Encoding Rules">DER</abbr> file that contains the SwiperProxy x.509 certificate, if necessary an intermediate <abbr title="Certificate Authority">CA</abbr> certificate and the private key.</li>
+            <li><var>hostname</var>: The hostname SwiperProxy is reachable on.</li>
+            <li><var>block_robots</var>: If you want to ensure that web spiders/crawlers do not try to crawl the entire internet through your proxy, you can set this setting to yes.</li>
+            <li><code>[rewrites]:</code>: Under this section, you can add custom rewrites for specific hostnames. The syntax is <code>hostname=newhostname</code>. For instances, if you want to ensure that http://www.example.org/ does not pass through the proxy, you could create the following rewrite: <code>www.example.org=www.example.org</code>. You can also rewrite a specific hostname to pass through a different proxy: <code>www.example.org=proxy2.example.com/www.example.org</code>.</li>
+          </ul>
+          <p>As a final configuration step, you will need to edit the <strong>index.html</strong> file found in the <strong>html</strong> directory. Change the example hostname found in that file to your selected hostname. Of course you can also apply custom styling, change the logo, etc.</p>
+          <p>You may want to optionally add a wildcard <abbr title="Domain Name System">DNS</abbr>-record to your proxy, e.g. <code>IN A *.proxy.example.org</code>. This allows people to also browse to, for example, http://example.org.proxy.yourdomain.tld which will be rewritten to http://proxy.yourdomain.tld/example.org. This works, even when forcing <abbr title="HTTP Secure">HTTPS</abbr>, though will likely always throw a certificate warning.</p>
+        </section>
+        <hr>
+        <section>
+          <h2>Running SwiperProxy</h2>
+          <p><kbd>$ sudo -u swiperproxy python Proxy.py -c proxy.conf</kbd> or <a href="#" title="Run as a daemon" type="text/html">run as a daemon</a>.</p>
+        </section>
+      </article>
+    </main>
+    <footer class="container">
+      <hr>
+      <p>
+        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html"><img alt="CC-BY 4.0" src="img/80x15.png"></a>&nbsp;<small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html">Creative Commons Attribution 4.0 International License</a>.</small><br>
+        <img alt="Free Software" src="img/freesoftware.png">&nbsp;<img alt="Open Source" src="img/opensource.png">&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><img alt="MIT License" src="img/mitlicense.png"></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><abbr title="Massachusetts Institute of Technology">MIT</abbr> license</a>.</small>
+      </p>
+    </footer>
+    <script src="js/vendor/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="js/vendor/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+  </body>
 </html>

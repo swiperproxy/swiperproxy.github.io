@@ -1,12 +1,12 @@
-# humanstxt.org/
-# The humans responsible & technology colophon
+/* TEAM */
+	Developer: Patrick Godschalk
+	E-mail: argure@donttrustrobots.nl
+	Location: Goes, The Netherlands
 
-# TEAM
+/* THANKS */
 
-    Patrick Godschalk -- Developer -- N/A
-
-# TECHNOLOGY COLOPHON
-
-    HTML5, CSS3
-    jQuery, Modernizr
-    Bootstrap, AngularJS
+/* SITE */
+	Last update: 2014-12-20
+	Standards: HTML5, CSS3
+	Components: AngularJS, Bootstrap, Git, GitHub, JQuery, Modernizr, Securimage
+	Software: Aptana Studio 3
