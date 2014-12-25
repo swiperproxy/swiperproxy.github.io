@@ -33,7 +33,6 @@
                 <li><a href="developer.html" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a></li>
               </ul>
             </li>
-            <li><a href="../security.html" title="Security" type="text/html"><span class="glyphicon glyphicon-lock"></span>&nbsp;Security</a></li>
             <li><a href="https://github.com/SwiperProxy/swiperproxy" target="_blank" title="Version control" type="text/html"><span class="glyphicon glyphicon-export"></span>&nbsp;Version control</a></li>
             <li><a href="https://github.com/SwiperProxy/swiperproxy/issues" target="_blank" title="Issue tracker" type="text/html"><span class="glyphicon glyphicon-align-left"></span>&nbsp;Issue Tracker</a></li>
             <li><a href="../donate.html" title="Donate" type="text/html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a>
@@ -45,6 +44,9 @@
     <main class="container">
       <h1>Documentation <small>for system administrators</small></h1>
       <hr>
+      <div class="alert alert-info" role="alert">
+        <p><span class="glyphicon glyphicon-comment"></span>&nbsp;Hey. We're still working on some of these. Sorry about that!</p>
+      </div>
       <section>
         <h2>Installing</h2>
         <ul>
@@ -67,8 +69,8 @@
         <h2>Advanced techniques</h2>
         <ul>
           <li><a href="sys-libcap.html" title="Listening on privileged ports with libcap" type="text/html">Listening on privileged ports with libcap</a></li>
-          <li>Multiple load-balanced SwiperProxy instances</li>
-          <li>Placing SwiperProxy behind an apache2 or nginx reverse proxy</li>
+          <li><a href="sys-loadbalancing.html" title="Multiple load-balanced SwiperProxy instances" type="text/html">Multiple load-balanced SwiperProxy instances</a></li>
+          <li>Placing SwiperProxy behind an apache2 reverse proxy</li>
           <li><a href="sys-shorewall.html" title="Rate-limiting with Shorewall" type="text/html">Rate-limiting with Shorewall</a></li>
           <li>Using SwiperProxy as a <abbr title="Wide Area Network">WAN</abbr> to <abbr title="Local Area Network">LAN</abbr> gateway</li>
         </ul>

@@ -33,7 +33,6 @@
                 <li><a href="developer.html" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a></li>
               </ul>
             </li>
-            <li><a href="../security.html" title="Security" type="text/html"><span class="glyphicon glyphicon-lock"></span>&nbsp;Security</a></li>
             <li><a href="https://github.com/SwiperProxy/swiperproxy" target="_blank" title="Version control" type="text/html"><span class="glyphicon glyphicon-export"></span>&nbsp;Version control</a></li>
             <li><a href="https://github.com/SwiperProxy/swiperproxy/issues" target="_blank" title="Issue tracker" type="text/html"><span class="glyphicon glyphicon-align-left"></span>&nbsp;Issue Tracker</a></li>
             <li><a href="../donate.html" title="Donate" type="text/html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a>
@@ -52,42 +51,34 @@
         <hr>
         <section>
           <h2>rules</h2>
-          <pre>
-#ACTION    SOURCE    DEST    PROTO  DEST  SOURCE    ORIGINAL  RATE    USER/  MARK  CONNLIMIT  TIME         HEADERS         SWITCH
+          <pre>#ACTION    SOURCE    DEST    PROTO  DEST  SOURCE    ORIGINAL  RATE    USER/  MARK  CONNLIMIT  TIME         HEADERS         SWITCH
 SECTION NEW
 ACCEPT     net       fw      tcp    80    -         -         s:apache2:10/min:15
-ACCEPT     net       fw      tcp    443   -         -         s:apache2:10/min:15
-          </pre>
+ACCEPT     net       fw      tcp    443   -         -         s:apache2:10/min:15</pre>
         </section>
         <hr>
         <section>
           <h2>tcclasses</h2>
-          <pre>
-# DEVICE  MARK  RATE  CEIL   PRIORITY  OPTIONS
+          <pre># DEVICE  MARK  RATE  CEIL   PRIORITY  OPTIONS
 eth0      2     1mbit 10mbit 2         tcp-ack,tos-minimize-delay
 eth0      3     2mbit 10mbit 3         default
 eth0      4     1mbit 1mbit  4         flow=dst
-eth0      5     1mbit 5mbit  5         flow=dst
-          </pre>
+eth0      5     1mbit 5mbit  5         flow=dst</pre>
         </section>
         <hr>
         <section>
           <h2>tcdevices</h2>
-          <pre>
-# INTERFACE  IN-BANDWIDTH  OUT-BANDWIDTH
-eth0         90mbit        90mbit
-          </pre>
+          <pre># INTERFACE  IN-BANDWIDTH  OUT-BANDWIDTH
+eth0         90mbit        90mbit</pre>
         </section>
         <hr>
         <section>
           <h2>tcrules</h2>
-          <pre>
-# ACTION  SOURCE  DEST  PROTO  DPOST  SPORT  USER        TEST  LENGTH  TOS  CONNBYTES
+          <pre># ACTION  SOURCE  DEST  PROTO  DPOST  SPORT  USER        TEST  LENGTH  TOS  CONNBYTES
 4         fw      -     tcp    -      80,443
 4         fw      -     -      -      -      www-data
 5         fw      -     tcp    -      80,443
-5         fw      -     -      -      -      swiperproxy
-          </pre>
+5         fw      -     -      -      -      swiperproxy</pre>
         </section>
       </article>
     </main>

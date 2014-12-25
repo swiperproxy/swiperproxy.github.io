@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>Verifying SHA-256 hashes | SwiperProxy</title>
+    <title>Multiple load-balanced instances | SwiperProxy</title>
     <meta content="The SwiperProxy Team" name="author">
     <meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
     <meta content="swiperproxy,swiper,proxy,web,python,http,https" name="keywords">
@@ -43,22 +43,34 @@
     </nav>
     <main class="container">
       <article>
-        <h1>Verifying SHA-256 sums</h1>
+        <h1>Multiple load-balanced instances</h1>
+        <hr>
+        <p>You may want to run two or more instances of SwiperProxy for various reasons. This can be on the same machine, or on multiple machines.</p>
+        <p>Of course, you could simply refer a portion of your users to <em>proxy1</em> and the other part to <em>proxy2</em>. However, more advanced techniques allow you to automate this process and distribute traffic between your instances.</p>
         <hr>
         <section>
-          <h2>Why?</h2>
-          <p>While all distribution channels support <abbr title="Transport Layer Security">TLS</abbr> encryption to ensure the authenticity of the data, it is good practice to verify downloads by its sum.</p>
-          <p>Historically, the MD5 and SHA-1 hashing algorithms are commonly used. However, MD5 has been explicitly considered insecure for quite a while now, and SHA-1 has been deprecated as well due to possible collision and preimage attacks. This is why we choose to use SHA-256, which should be good for quite a few years.</p>
-          <p>Under each release in the <a href="..//download.html" title="Download page" type="text/html">Download page</a> you will find the full SHA-256 sum of the zip archive or tarball as we distribute it. When you verify locally, your hash and the published hash should match. If they don't, then your release has possibly been tampered with and you should exercise caution.</p>
+          <h2>Using load balancing software</h2>
+          <p>Just like how you can use a webserver to reverse proxy to a single SwiperProxy instance, it is also possible to reverse proxy to multiple instances. The method to do this greatly differs between webservers, and it's recommended you view your webserver documentation on how to do this.</p>
         </section>
         <hr>
         <section>
-          <h2>How?</h2>
-          <p>It is likely you already have the <code>sha256sum</code> binary in your distribution as it is part of the <a href="http://www.gnu.org/software/coreutils/" target="_blank" title="GNU coreutils" type="text/html">GNU coreutils</a>. If not, your distribution likely has a package. In Debian, it is <var>coreutils</var>.</p>
-          <p>To verify, simply run <kbd>sha256sum</kbd> with the zip archive or tarball as its only argument. For example:<br>
-          <kbd>$ sha256sum /usr/local/src/swiperproxy-1.0.tar.gz</kbd></p>
-          <p>Compare this hash to the published hash for the release you downloaded and make sure they match.</p>
-          <p>See <kbd>sha256sum --help</kbd> or <kbd>man sha256sum</kbd> for more information.</p>
+          <h2>Round-robin <abbr title="Domain Name System">DNS</abbr></h2>
+          <p>An alternate method of load balancing, which does not necessarily require a dedicated software or hardware node, is called round robin <abbr title="Domain Name System">DNS</abbr>. In this technique, multiple <abbr title="Internet Protocol">IP</abbr> addresses are associated with a single domain name; clients are expected to choose which server to connect to. Unlike the use of a dedicated load balancer, this technique exposes to clients the existence of multiple backend servers. The technique has other advantages and disadvantages, depending on the degree of control over the <abbr title="Domain Name System">DNS</abbr> server and the granularity of load balancing desired.</p>
+          <p>Another more effective technique for load-balancing using <abbr title="Domain Name System">DNS</abbr> is to delegate <em>proxy.example.org</em> as a sub-domain whose zone is served by each of the same servers that are serving the web site. This technique works particularly well where individual servers are spread geographically on the Internet. For example:</p>
+          <pre>backend1.example.org A  192.0.2.1
+backend2.example.org A  203.0.113.2
+proxy.example.org    NS backend1.example.org
+proxy.example.org    NS backend1.example.org</pre>
+          <p>However, the zone file for <em>proxy.example.org</em> on each server is different such that each server resolves its own <abbr title="Internet Protocol">IP</abbr> address as the <abbr title="Address">A</abbr>-record. On backend one the zone file for <em>proxy.example.org</em> reports:</p>
+          <pre>@ in a 192.0.2.1</pre>
+          <p>On backend two the same zone file contains:</p>
+          <pre>@ in a 203.0.113.2</pre>
+          <p>This way, when a server is down, its <abbr title="Domain Name System">DNS</abbr> will not respond and the web service does not receive any traffic. If the line to one server is congested, the unreliability of <abbr title="Domain Name System">DNS</abbr> ensures less <abbr title="Hypertext Transfer Protocol">HTTP</abbr> traffic reaches that server. Furthermore, the quickest <abbr title="Domain Name System">DNS</abbr> response to the resolver is nearly always the one from the network's closest server, ensuring geo-sensitive load-balancing. A short <abbr title="Time To Live">TTL</abbr> on the <abbr title="Address">A</abbr>-record helps to ensure traffic is quickly diverted when a server goes down. Consideration must be given the possibility that this technique may cause individual clients to switch between individual servers in mid-session.</p>
+        </section>
+        <hr>
+        <section>
+          <h2>Using the rewrite function</h2>
+          <p>The <a href="sys-referenceconf.html" title="proxy.conf" type="text/html">proxy.conf</a> configuration allows <abbr title="Uniform Resource Locator">URL</abbr> rewriting. You can use this to rewrite traffic from one proxy to the other. While very limited, this could be used to have one proxy with a restrictive whitelist but high bandwidth to access certain sites, and rewrite all other destinations to the secondary proxy - implementing a <abbr title="Quality of Service">QoS</abbr>-esque mechanic.</p>
         </section>
       </article>
     </main>
@@ -68,9 +80,9 @@
         <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html"><img alt="CC-BY 4.0" src="../img/80x15.png"></a>&nbsp;<small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html">Creative Commons Attribution 4.0 International License</a>.</small><br>
         <img alt="Free Software" src="../img/freesoftware.png">&nbsp;<img alt="Open Source" src="../img/opensource.png">&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><img alt="MIT License" src="../img/mitlicense.png"></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><abbr title="Massachusetts Institute of Technology">MIT</abbr> license</a>.</small>
       </p>
+      <p><small>Excerpts on round robin <abbr title="Domain Name System">DNS</abbr> are taken from Wikipedia, which is <a href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License" target="_blank" title="CC-BY-SA 3.0" type="text/html"><abbr title="Creative Commons - Attribution - Share Alike">CC-BY-SA</abbr> 3.0</a>.</small></p>
     </footer>
     <script src="../js/vendor/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script src="../js/vendor/bootstrap/bootstrap.min.js" type="text/javascript"></script>
   </body>
 </html>
-

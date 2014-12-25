@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>Verifying SHA-256 hashes | SwiperProxy</title>
+    <title>Infrastructure for developers | SwiperProxy</title>
     <meta content="The SwiperProxy Team" name="author">
     <meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
     <meta content="swiperproxy,swiper,proxy,web,python,http,https" name="keywords">
@@ -43,22 +43,27 @@
     </nav>
     <main class="container">
       <article>
-        <h1>Verifying SHA-256 sums</h1>
+        <h1>Infrastructure for developers</h1>
         <hr>
         <section>
-          <h2>Why?</h2>
-          <p>While all distribution channels support <abbr title="Transport Layer Security">TLS</abbr> encryption to ensure the authenticity of the data, it is good practice to verify downloads by its sum.</p>
-          <p>Historically, the MD5 and SHA-1 hashing algorithms are commonly used. However, MD5 has been explicitly considered insecure for quite a while now, and SHA-1 has been deprecated as well due to possible collision and preimage attacks. This is why we choose to use SHA-256, which should be good for quite a few years.</p>
-          <p>Under each release in the <a href="..//download.html" title="Download page" type="text/html">Download page</a> you will find the full SHA-256 sum of the zip archive or tarball as we distribute it. When you verify locally, your hash and the published hash should match. If they don't, then your release has possibly been tampered with and you should exercise caution.</p>
+          <h2>Tools</h2>
+          <p>Several tools are available for contributing to SwiperProxy:</p>
+          <ul>
+            <li><strong><abbr title="Version Control System">VCS</abbr></strong>: <a href="https://github.com/SwiperProxy/swiperproxy" target="_blank" title="GitHub" type="text/html">GitHub</a></li>
+            <li><strong><abbr title="Continuous Integration">CI</abbr></strong>: <a href="https://travis-ci.org/SwiperProxy/swiperproxy" target="_blank" title="Travis CI" type="text/html">Travis CI</a></li>
+            <li><strong><abbr title="Application Programming Interface">API</abbr>-documentation</strong>: <a href="apidocs" title="pydoctor" type="text/html">pydoctor</a></li>
+            <li><strong>Issue tracker:</strong>: <a href="https://github.com/SwiperProxy/swiperproxy/issues" title="GitHub" type="text/html">GitHub</a></li>
+            <li><strong><abbr title="Internet Relay Chat">IRC</abbr></strong>: <a href="ircs://chat.freenode.net:6697/#swiperproxy">#swiperproxy on Freenode</a></li>
+          </ul>
         </section>
         <hr>
         <section>
-          <h2>How?</h2>
-          <p>It is likely you already have the <code>sha256sum</code> binary in your distribution as it is part of the <a href="http://www.gnu.org/software/coreutils/" target="_blank" title="GNU coreutils" type="text/html">GNU coreutils</a>. If not, your distribution likely has a package. In Debian, it is <var>coreutils</var>.</p>
-          <p>To verify, simply run <kbd>sha256sum</kbd> with the zip archive or tarball as its only argument. For example:<br>
-          <kbd>$ sha256sum /usr/local/src/swiperproxy-1.0.tar.gz</kbd></p>
-          <p>Compare this hash to the published hash for the release you downloaded and make sure they match.</p>
-          <p>See <kbd>sha256sum --help</kbd> or <kbd>man sha256sum</kbd> for more information.</p>
+          <h2>Policy on new infrastructure</h2>
+          <p>Adding new infrastructure follows a seemingly conflicting policy: everything should be as self-contained as possible, but nothing should be self-hosted.</p>
+          <p>The reason for this is simple. Third parties are, by definition, unreliable and we use as little of them as possible. E.g., we use GitHub Pages for this website, but won't load in libraries from <abbr title="Content Delivery Network">CDN</abbr>'s. This website however, should never be self-hosted, as while third parties are unreliable, project members are even worse.</p>
+          <p>This is not to say project members can't be trusted; on the contrary. However, by granting one project member, or a small subset of the project, access to critical infrastructure, they gain a position of power from this - one which is inherently exclusionary and based on wealth rather than merits of contributing.</p>
+          <p>For example, if we were to place this website on a <abbr title="Virtual Private Server">VPS</abbr>, the owner of that server could influence voting to achieve a certain outcome, using the power of being able to shut down the server as blackmail.</p>
+          <p>This is obviously a scenario that should be avoided, hence why no project member should ever host critical infrastructure if it can be avoided.</p>
         </section>
       </article>
     </main>
@@ -73,4 +78,3 @@
     <script src="../js/vendor/bootstrap/bootstrap.min.js" type="text/javascript"></script>
   </body>
 </html>
-
