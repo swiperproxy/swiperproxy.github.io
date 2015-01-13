@@ -63,11 +63,11 @@
         <p>If you want to self-sign your certificate:<br>
         <kbd>$ openssl x509 -req -sha512 -days 365 -in /etc/ssl/csr/proxy.example.org.csr -signkey /etc/ssl/private/proxy.example.org.key -out /etc/ssl/certs/proxy.example.org.pem</kbd></p>
         <p>Either way, to use the certificate, it must be readable by the SwiperProxy user, and in a format that SwiperProxy will understand. To do this, concatenate the private key, certificate and any intermediate certificates (in signing order) and make the file readable by the SwiperProxy user. For example:<br>
-        <kbd>$ cp /etc/ssl/private/proxy.example.org.key /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</kbd><br>
-        <kbd>$ cat /etc/ssl/certs/proxy.example.org.pem > /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</kbd><br>
-        <kbd>$ cat /etc/ssl/certs/ca.intermediate.cert.pem > /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</kbd><br>
-        <kbd>$ chown swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</kbd><br>
-        <kbd>$ chmod 400 /opt/SwiperProxy/swiperproxy/swiperproxy/certificate.pem</kbd></p>
+        <kbd>$ cp /etc/ssl/private/proxy.example.org.key /opt/SwiperProxy/swiperproxy/certificate.pem</kbd><br>
+        <kbd>$ cat /etc/ssl/certs/proxy.example.org.pem > /opt/SwiperProxy/swiperproxy/certificate.pem</kbd><br>
+        <kbd>$ cat /etc/ssl/certs/ca.intermediate.cert.pem > /opt/SwiperProxy/swiperproxy/certificate.pem</kbd><br>
+        <kbd>$ chown swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy/certificate.pem</kbd><br>
+        <kbd>$ chmod 400 /opt/SwiperProxy/swiperproxy/certificate.pem</kbd></p>
         <p>See <kbd>man openssl</kbd> for more information.</p>
       </article>
     </main>
