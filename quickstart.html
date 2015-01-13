@@ -51,9 +51,6 @@
           <h2>Dependencies</h2>
           <!-- TODO: add some links on obtaining these dependencies -->
           <ul>
-            <li>Bootstrap, 2.0.2 or higher</li>
-            <li>JQuery, 1.7.2 or higher</li>
-            <li>Modernizr, 2.6.2 or higher</li>
             <li>Python, 2.7 or higher</li>
             <li>Python IPY, 0.75 or higher</li>
             <li>streamhtmlparser, 0.1 or higher</li>
@@ -76,30 +73,15 @@
                 <section>
                   <h3>Debian 7 Wheezy</h3>
                   <p>Install the dependencies available from the stable repository:<br>
-                  <kbd>$ apt-get install build-essential cython libcap2-bin libjs-jquery python python-dev python-ipy sudo wget</kbd></p>
-                  <p>Install the Modernizr library manually as it is not yet available in stable:<br>
-                  <kbd>$ mkdir /usr/local/share/javascript</kbd><br>
-                  <kbd>$ mkdir /usr/local/share/javascript/modernizr</kbd><br>
-                  <kbd>$ wget http://modernizr.com/downloads/modernizr-latest.js \</kbd><br>
-                  <kbd>-O /usr/local/share/javascript/modernizr/modernizr.min.js</kbd><br>
-                  <kbd>$ ln -s /usr/local/share/javascript/modernizr /usr/share/javascript/modernizr</kbd></p>
-                  <p>Install the Bootstrap library manually as well:<br>
-                  <kbd>$ wget https://github.com/twbs/bootstrap/releases/download/v3.3.1/bootstrap-3.3.1-dist.zip \</kbd><br>
-                  <kbd>-O /usr/local/src/bootstrap-3.3.1-dist.zip</kbd><br>
-                  <kbd>$ unzip /usr/local/src/bootstrap-3-3.1.zip</kbd><br>
-                  <kbd>$ mv /usr/local/src/dist /usr/local/share/bootstrap</kbd><br>
-                  <kbd>$ ln -s /usr/local/share/bootstrap /usr/share/bootstrap</kbd></p>
+                  <kbd>$ apt-get install build-essential cython python python-dev python-ipy</kbd></p>
                   <p>Download and extract SwiperProxy:<br>
                   <kbd>$ mkdir /opt/SwiperProxy</kbd><br>
-                  <kbd>$ wget https://github.com/SwiperProxy/swiperproxy/archive/swiperproxy-1.0.tar.gz \</kbd><br>
-                  <kbd>-O /usr/local/src/swiperproxy-1.0.tar.gz</kbd><br>
-                  <kbd>$ tar -zxvf /usr/local/src/swiperproxy-1.0.tar.gz</kbd><br>
+                  <kbd>$ wget https://github.com/SwiperProxy/swiperproxy/archive/v1.0.1.tar.gz \</kbd><br>
+                  <kbd>-O /usr/local/src/swiperproxy-v1.0.1.tar.gz</kbd><br>
+                  <kbd>$ tar -zxvf /usr/local/src/swiperproxy-v1.0.1.tar.gz</kbd><br>
                   <kbd>$ mv /usr/local/src/swiperproxy /opt/SwiperProxy/swiperproxy</kbd></p>
-                  <p>Symlink the JavaScript and Bootstrap libraries so SwiperProxy can access them:<br>
-                  <kbd>$ ln -s /usr/share/javascript /opt/SwiperProxy/swiperproxy/swiperproxy/htdocs/javascript</kbd><br>
-                  <kbd>$ ln -s /usr/share/bootstrap /opt/SwiperProxy/swiperproxy/swiperproxy/htdocs/bootstrap</kbd></p>
                   <p>Compile streamhtmlparser and its Python module:<br>
-                  <kbd>$ cd /opt/SwiperProxy/swiperproxy/streamhtmlparser</kbd><br>
+                  <kbd>$ cd /opt/SwiperProxy/swiperproxy/include/streamhtmlparser</kbd><br>
                   <kbd>$ ./configure</kbd><br>
                   <kbd>$ make</kbd><br>
                   <kbd>$ make install</kbd><br>
@@ -112,11 +94,9 @@
                   <p>Create the runtime environment and add an unprivileged user:<br>
                   <kbd>$ mkdir /var/log/swiperproxy</kbd><br>
                   <kbd>$ addgroup --system swiperproxy</kbd><br>
-                  <kbd>$ adduser --system swiperproxy --ingroup=swiperproxy --home=/opt/SwiperProxy/swiperproxy/swiperproxy</kbd><br>
+                  <kbd>$ adduser --system swiperproxy --ingroup=swiperproxy --home=/opt/SwiperProxy/swiperproxy</kbd><br>
                   <kbd>$ chown swiperproxy:swiperproxy /var/log/swiperproxy</kbd><br>
-                  <kbd>$ chown swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy/swiperproxy</kbd></p>
-                  <p>Give <var>CAP_NET_BIND_SERVICE</var> to Proxy.py so it can bind to privileged ports (&lt; 1024):<br>
-                  <kbd>$ setcap 'cap_net_bind_service=+ep' /opt/SwiperProxy/swiperproxy/swiperproxy/Proxy.py</kbd></p>
+                  <kbd>$ chown swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy</kbd></p>
                 </section>
               </div>
             </div>
