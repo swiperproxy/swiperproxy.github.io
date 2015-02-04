@@ -47,7 +47,7 @@
         <h1>Listening on privileged ports with libcap</h1>
         <hr>
         <p>You might want to run SwiperProxy on a port below 1024, particularly 80/443. However, ports 0 through 1023 cannot be bound to by regular users. Thankfully, with any modern kernel, there is more sophisticated privilege management than "run it as root".</p>
-        <p>Passing <var>CAP_NET_BIND_SERVICE</var> to Proxy.py will allow this to bind to these privileged ports. The easiest way to do this is using the setcap(8) binary, which in Debian, is part of the libcap2-bin package.</p>
+        <p>Passing <var>CAP_NET_BIND_SERVICE</var> to the python binary will allow this to bind to these privileged ports. The easiest way to do this is using the setcap(8) binary, which in Debian, is part of the libcap2-bin package.</p>
         <p>Once you have this binary, give CAP_NET_BIND_SERVICE to the python binary. For example:<br>
         <kbd>$ setcap 'cap_net_bind_service=+ep' /usr/bin/python2.7</kbd></p>
         <p>See <kbd>setcap --help</kbd> or <kbd>man setcap</kbd> for more information.</p>
