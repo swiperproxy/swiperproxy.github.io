@@ -2,7 +2,7 @@
 <html class="no-js">
   <head>
     <meta charset="utf-8">
-    <title>System Administrator Documentation | SwiperProxy</title>
+    <title>Running SwiperProxy as a daemon | SwiperProxy</title>
     <meta content="The SwiperProxy Team" name="author">
     <meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
     <meta content="swiperproxy,swiper,proxy,web,python,http,https" name="keywords">
@@ -30,7 +30,7 @@
             <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Documentation" id="documentation"><span class="glyphicon glyphicon-book"></span>&nbsp;Documentation <span class="caret"></span></a>
               <ul aria-labelledby="documentation" class="dropdown-menu">
-                <li class="active"><a href="sysadmin.html" title="Documentation for system administrators" type="text/html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a></li>
+                <li><a href="sysadmin.html" title="Documentation for system administrators" type="text/html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a></li>
                 <li><a href="developer.html" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a></li>
               </ul>
             </li>
@@ -43,38 +43,24 @@
       </div>
     </nav>
     <main class="container">
-      <h1>Documentation <small>for system administrators</small></h1>
-      <hr>
-      <div class="alert alert-info" role="alert">
-        <p><span class="glyphicon glyphicon-comment"></span>&nbsp;Hey. We're still working on some of these. Sorry about that!</p>
-      </div>
-      <section>
-        <h2>Installing</h2>
-        <ul>
-          <li><a href="sys-installing.html" title="Installing SwiperProxy" type="text/html">Installing SwiperProxy</a></li>
-          <li><a href="sys-sha256.html" title="Verifying SHA-256 sums" type="text/html">Verifying SHA-256 sums</a></li>
-        </ul>
-      </section>
-      <hr>
-      <section>
-        <h2>Configuring</h2>
-        <ul>
-          <li><a href="sys-referenceconf.html" title="proxy.conf reference documentation" type="text/html">proxy.conf reference documentation</a></li>
-          <li><a href="sys-genx509.html" title="Generating an x.509 certificate" type="text/html">Generating an x.509 certificate</a></li>
-        </ul>
-      </section>
-      <hr>
-      <section>
-        <h2>Advanced techniques</h2>
-        <ul>
-          <li><a href="sys-daemon.html" title="Running SwiperProxy as a daemon" type="text/html">Running SwiperProxy as a daemon</a></li>
-          <li><a href="sys-libcap.html" title="Listening on privileged ports with libcap" type="text/html">Listening on privileged ports with libcap</a></li>
-          <li><a href="sys-loadbalancing.html" title="Multiple load-balanced SwiperProxy instances" type="text/html">Multiple load-balanced SwiperProxy instances</a></li>
-          <li><a href="sys-apachereverseproxy.html" title="Placing SwiperProxy behind an apache2 reverse proxy" type="text/html">Placing SwiperProxy behind an apache2 reverse proxy</a></li>
-          <li><a href="sys-shorewall.html" title="Rate-limiting with Shorewall" type="text/html">Rate-limiting with Shorewall</a></li>
-          <li>Using SwiperProxy as a <abbr title="Wide Area Network">WAN</abbr> to <abbr title="Local Area Network">LAN</abbr> gateway</li>
-        </ul>
-      </section>
+      <article>
+        <h1>Running SwiperProxy as a daemon</h1>
+        <hr>
+        <p>A sysvinit script is included with SwiperProxy. Use the following steps to install SwiperProxy as a daemon with a sysvinit-compatible init system:</p>
+        <p>
+          <kbd>$ ln -s /path/to/swiperproxy/include/init/sysvinit.sh /etc/init.d/swiperproxy</kbd><br>
+          <kbd>$ ln -s /path/to/swiperproxy/include/init/sysvinit-defaults /etc/default/swiperproxy</kbd><br>
+          <kbd>$ chmod a+x /etc/init.d/swiperproxy</kbd><br>
+          <kbd>$ update-rc.d swiperproxy defaults</kbd>
+        </p>
+	<p>
+          If you run systemd with systemd-sysv, you may need to run:<br>
+          <kbd>$ systemctl daemon-reload</kbd>
+        </p>
+        <p>Edit the defaults file, and run SwiperProxy with:<br>
+          <kbd>$ /etc/init.d/swiperproxy start</kbd>
+        </p>
+      </article>
     </main>
     <footer class="container">
       <hr>
