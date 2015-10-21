@@ -1,12 +1,12 @@
 /* TEAM */
 	Developer: Patrick Godschalk
 	E-mail: argure@donttrustrobots.nl
-	Location: Goes, The Netherlands
+	Location: Leiden, The Netherlands
 
 /* THANKS */
 
 /* SITE */
-	Last update: 2014-12-20
+	Last update: 2015-10-21
 	Standards: HTML5, CSS3
-	Components: AngularJS, Bootstrap, Git, GitHub, JQuery, Modernizr, Securimage
+	Components: AngularJS, Bootstrap, jQuery
 	Software: Aptana Studio 3

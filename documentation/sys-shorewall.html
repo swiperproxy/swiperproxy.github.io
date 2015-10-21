@@ -1,96 +1,103 @@
 <!DOCTYPE html>
-<html class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <title>Rate-limiting with Shorewall | SwiperProxy</title>
-    <meta content="The SwiperProxy Team" name="author">
-    <meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
-    <meta content="swiperproxy,swiper,proxy,web,python,http,https" name="keywords">
-    <link href="../humans.txt" rel="author" type="text/plain">
-    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="../css/swiperproxy.css" rel="stylesheet" type="text/css">
-  </head>
-  <body>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="../index.html" title="SwiperProxy" type="text/html">SwiperProxy</a>
-          <button class="navbar-toggle collapsed" type="button" data-target="#navbar-main" data-toggle="collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-main">
-          <ul class="nav navbar-nav">
-            <li><a href="../download.html" title="Download" type="text/html"><span class="glyphicon glyphicon-save"></span>&nbsp;Download</a></li>
-            <li><a href="../quickstart.html" title="Quick-start" type="text/html"><span class="glyphicon glyphicon-file"></span>&nbsp;Quick-start</a></li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Documentation" id="documentation"><span class="glyphicon glyphicon-book"></span>&nbsp;Documentation <span class="caret"></span></a>
-              <ul aria-labelledby="documentation" class="dropdown-menu">
-                <li><a href="sysadmin.html" title="Documentation for system administrators" type="text/html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a></li>
-                <li><a href="developer.html" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a></li>
-              </ul>
-            </li>
-            <li><a href="https://github.com/SwiperProxy/swiperproxy" target="_blank" title="Version control" type="text/html"><span class="fa fa-github"></span>&nbsp;Version control</a></li>
-            <li><a href="https://github.com/SwiperProxy/swiperproxy/issues" target="_blank" title="Issue tracker" type="text/html"><span class="glyphicon glyphicon-align-left"></span>&nbsp;Issue Tracker</a></li>
-            <li><a href="../donate.html" title="Donate" type="text/html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a></li>
-            <li><a href="../contact.html" title="Contact" type="text/html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <main class="container">
-      <article>
-        <h1>Rate-limiting with Shorewall</h1>
-        <hr>
-        <p>Open web proxies can incur heavy traffic. By default, SwiperProxy will use all bandwidth available to it. However, you may want to restrict the bandwidth usage to leave some for other services, or to stay within bandwidth quota's.</p>
-        <p>This document assumes that you are already moderately familiar with Shorewall and have a basic functional service set up. If not, see the <a href="http://shorewall.net" target="_blank" title="Shorewall website" type="text/html">Shorewall website</a>. We will also assume <abbr title="Internet Protocol version 4">IPv4</abbr>-only. The same practices used here also mostly apply to shorewall6.</p>
-        <p>These lines in their respective configuration files will rate limit the proxy usage. They are meant as examples, and you should tweak and configure as desired.</p>
-        <hr>
-        <section>
-          <h2>rules</h2>
-          <pre>#ACTION    SOURCE    DEST    PROTO  DEST  SOURCE    ORIGINAL  RATE    USER/  MARK  CONNLIMIT  TIME         HEADERS         SWITCH
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Rate-limiting with Shorewall | SwiperProxy</title>
+		<meta content="self" http-equiv="Content-Security-Policy">
+		<meta content="swiperproxy" http-equiv="default-style">
+		<meta content="The SwiperProxy Team" name="author">
+		<meta content="The SwiperProxy Team" name="creator">
+		<meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
+		<meta content="index, follow" name="googlebot">
+		<meta content="swiperproxy, swiper, proxy, web, python, http, https" name="keywords">
+		<meta content="The SwiperProxy Team" name="publisher">
+		<meta content="index, follow" name="robots">
+		<meta content="index, follow" name="slurp">
+		<link href="../humans.txt" rel="author" type="text/plain">
+		<link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/swiperproxy.min.css" id="swiperproxy" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="../index.html" hreflang="en" rel="index" title="SwiperProxy" type="text/html">SwiperProxy</a>
+					<button class="navbar-toggle collapsed" type="button" data-target="#navbar-main" data-toggle="collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar-main">
+					<ul class="nav navbar-nav">
+						<li><a href="../download.html" hreflang="en" title="Download" type="text/html"><span class="glyphicon glyphicon-save"></span> Download</a></li>
+						<li><a href="../quickstart.html" hreflang="en" rel="help" title="Quick-start" type="text/html"><span class="glyphicon glyphicon-file"></span> Quick-start</a></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Documentation" id="documentation"><span class="glyphicon glyphicon-book"></span> Documentation <span class="caret"></span></a>
+							<ul aria-labelledby="documentation" class="dropdown-menu">
+								<li><a href="sysadmin.html" hreflang="en" rel="help" title="Documentation for system administrators" type="text/html"><span class="glyphicon glyphicon-cog"></span> For system administrators</a></li>
+								<li><a href="developer.html" hreflang="en" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span> For developers</a></li>
+							</ul>
+						</li>
+						<li><a href="https://github.com/SwiperProxy/swiperproxy" hreflang="en" rel="external" target="_blank" title="Version control" type="text/html"><span class="fa fa-github"></span> Version control</a></li>
+						<li><a href="https://github.com/SwiperProxy/swiperproxy/issues" hreflang="en" rel="external" target="_blank" title="Issue tracker" type="text/html"><span class="glyphicon glyphicon-align-left"></span> Issue Tracker</a></li>
+						<li><a href="../donate.html" hreflang="en" title="Donate" type="text/html"><span class="glyphicon glyphicon-heart"></span> Donate</a></li>
+						<li><a href="../contact.html" hreflang="en" title="Contact" type="text/html"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<main class="container">
+			<article>
+				<h1>Rate-limiting with Shorewall</h1>
+				<hr>
+				<p>Open web proxies can incur heavy traffic. By default, SwiperProxy will use all bandwidth available to it. However, you may want to restrict the bandwidth usage to leave some for other services, or to stay within bandwidth quota's.</p>
+				<p>This document assumes that you are already moderately familiar with Shorewall and have a basic functional service set up. If not, see the <a href="http://shorewall.net" target="_blank" title="Shorewall website" type="text/html">Shorewall website</a>. We will also assume <abbr title="Internet Protocol version 4">IPv4</abbr>-only. The same practices used here also mostly apply to shorewall6.</p>
+				<p>These lines in their respective configuration files will rate limit the proxy usage. They are meant as examples, and you should tweak and configure as desired.</p>
+				<hr>
+				<section>
+					<h2>rules</h2>
+					<pre>#ACTION    SOURCE    DEST    PROTO  DEST  SOURCE    ORIGINAL  RATE    USER/  MARK  CONNLIMIT  TIME         HEADERS         SWITCH
 SECTION NEW
 ACCEPT     net       fw      tcp    80    -         -         s:apache2:10/min:15
 ACCEPT     net       fw      tcp    443   -         -         s:apache2:10/min:15</pre>
-        </section>
-        <hr>
-        <section>
-          <h2>tcclasses</h2>
-          <pre># DEVICE  MARK  RATE  CEIL   PRIORITY  OPTIONS
+				</section>
+				<hr>
+				<section>
+					<h2>tcclasses</h2>
+					<pre># DEVICE  MARK  RATE  CEIL   PRIORITY  OPTIONS
 eth0      2     1mbit 10mbit 2         tcp-ack,tos-minimize-delay
 eth0      3     2mbit 10mbit 3         default
 eth0      4     1mbit 1mbit  4         flow=dst
 eth0      5     1mbit 5mbit  5         flow=dst</pre>
-        </section>
-        <hr>
-        <section>
-          <h2>tcdevices</h2>
-          <pre># INTERFACE  IN-BANDWIDTH  OUT-BANDWIDTH
+				</section>
+				<hr>
+				<section>
+					<h2>tcdevices</h2>
+					<pre># INTERFACE  IN-BANDWIDTH  OUT-BANDWIDTH
 eth0         90mbit        90mbit</pre>
-        </section>
-        <hr>
-        <section>
-          <h2>tcrules</h2>
-          <pre># ACTION  SOURCE  DEST  PROTO  DPOST  SPORT  USER        TEST  LENGTH  TOS  CONNBYTES
+				</section>
+				<hr>
+				<section>
+					<h2>tcrules</h2>
+					<pre># ACTION  SOURCE  DEST  PROTO  DPOST  SPORT  USER        TEST  LENGTH  TOS  CONNBYTES
 4         fw      -     tcp    -      80,443
 4         fw      -     -      -      -      www-data
 5         fw      -     tcp    -      80,443
 5         fw      -     -      -      -      swiperproxy</pre>
-        </section>
-      </article>
-    </main>
-    <footer class="container">
-      <hr>
-      <p>
-        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html"><img alt="CC-BY 4.0" src="../img/80x15.png"></a>&nbsp;<small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html">Creative Commons Attribution 4.0 International License</a>.</small><br>
-        <img alt="Free Software" src="../img/freesoftware.png">&nbsp;<img alt="Open Source" src="../img/opensource.png">&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><img alt="MIT License" src="../img/mitlicense.png"></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><abbr title="Massachusetts Institute of Technology">MIT</abbr> license</a>.</small>
-      </p>
-    </footer>
-    <script src="../lib/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
-    <script src="../lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-  </body>
+				</section>
+			</article>
+		</main>
+		<footer class="container">
+			<hr>
+			<p>
+				<a href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="external license" target="_blank" title="CC-BY 4.0" type="text/html"><img alt="CC-BY 4.0" src="../img/80x15.png"></a> <small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="external license" target="_blank" title="CC-BY 4.0" type="text/html">Creative Commons Attribution 4.0 International License</a>.</small><br>
+				<img alt="Free Software" src="../img/freesoftware.png"> <img alt="Open Source" src="../img/opensource.png"> <a href="https://github.com/SwiperProxy/swiperproxy/blob/develop/doc/COPYING.md" hreflang="en" rel="external license" target="_blank" title="MIT License" type="text/html"><img alt="MIT License" src="../img/mitlicense.png"></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/develop/doc/COPYING.md" hreflang="en" rel="external license" target="_blank" title="MIT License" type="text/html"><abbr title="Massachusetts Institute of Technology">MIT</abbr> license</a>.</small>
+			</p>
+		</footer>
+		<script src="../lib/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+		<script src="../lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	</body>
 </html>

@@ -1,89 +1,95 @@
 <!DOCTYPE html>
-<html class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <title>Multiple load-balanced instances | SwiperProxy</title>
-    <meta content="The SwiperProxy Team" name="author">
-    <meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
-    <meta content="swiperproxy,swiper,proxy,web,python,http,https" name="keywords">
-    <link href="../humans.txt" rel="author" type="text/plain">
-    <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="../css/swiperproxy.css" rel="stylesheet" type="text/css">
-  </head>
-  <body>
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="../index.html" title="SwiperProxy" type="text/html">SwiperProxy</a>
-          <button class="navbar-toggle collapsed" type="button" data-target="#navbar-main" data-toggle="collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-main">
-          <ul class="nav navbar-nav">
-            <li><a href="../download.html" title="Download" type="text/html"><span class="glyphicon glyphicon-save"></span>&nbsp;Download</a></li>
-            <li><a href="../quickstart.html" title="Quick-start" type="text/html"><span class="glyphicon glyphicon-file"></span>&nbsp;Quick-start</a></li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Documentation" id="documentation"><span class="glyphicon glyphicon-book"></span>&nbsp;Documentation <span class="caret"></span></a>
-              <ul aria-labelledby="documentation" class="dropdown-menu">
-                <li><a href="sysadmin.html" title="Documentation for system administrators" type="text/html"><span class="glyphicon glyphicon-cog"></span>&nbsp;For system administrators</a></li>
-                <li><a href="developer.html" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span>&nbsp;For developers</a></li>
-              </ul>
-            </li>
-            <li><a href="https://github.com/SwiperProxy/swiperproxy" target="_blank" title="Version control" type="text/html"><span class="fa fa-github"></span>&nbsp;Version control</a></li>
-            <li><a href="https://github.com/SwiperProxy/swiperproxy/issues" target="_blank" title="Issue tracker" type="text/html"><span class="glyphicon glyphicon-align-left"></span>&nbsp;Issue Tracker</a></li>
-            <li><a href="../donate.html" title="Donate" type="text/html"><span class="glyphicon glyphicon-heart"></span>&nbsp;Donate</a></li>
-            <li><a href="../contact.html" title="Contact" type="text/html"><span class="glyphicon glyphicon-envelope"></span>&nbsp;Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <main class="container">
-      <article>
-        <h1>Multiple load-balanced instances</h1>
-        <hr>
-        <p>You may want to run two or more instances of SwiperProxy for various reasons. This can be on the same machine, or on multiple machines.</p>
-        <p>Of course, you could simply refer a portion of your users to <em>proxy1</em> and the other part to <em>proxy2</em>. However, more advanced techniques allow you to automate this process and distribute traffic between your instances.</p>
-        <hr>
-        <section>
-          <h2>Using load balancing software</h2>
-          <p>Just like how you can use a webserver to reverse proxy to a single SwiperProxy instance, it is also possible to reverse proxy to multiple instances. The method to do this greatly differs between webservers, and it's recommended you view your webserver documentation on how to do this.</p>
-        </section>
-        <hr>
-        <section>
-          <h2>Round-robin <abbr title="Domain Name System">DNS</abbr></h2>
-          <p>An alternate method of load balancing, which does not necessarily require a dedicated software or hardware node, is called round robin <abbr title="Domain Name System">DNS</abbr>. In this technique, multiple <abbr title="Internet Protocol">IP</abbr> addresses are associated with a single domain name; clients are expected to choose which server to connect to. Unlike the use of a dedicated load balancer, this technique exposes to clients the existence of multiple backend servers. The technique has other advantages and disadvantages, depending on the degree of control over the <abbr title="Domain Name System">DNS</abbr> server and the granularity of load balancing desired.</p>
-          <p>Another more effective technique for load-balancing using <abbr title="Domain Name System">DNS</abbr> is to delegate <em>proxy.example.org</em> as a sub-domain whose zone is served by each of the same servers that are serving the web site. This technique works particularly well where individual servers are spread geographically on the Internet. For example:</p>
-          <pre>backend1.example.org A  192.0.2.1
-backend2.example.org A  203.0.113.2
-proxy.example.org    NS backend1.example.org
-proxy.example.org    NS backend1.example.org</pre>
-          <p>However, the zone file for <em>proxy.example.org</em> on each server is different such that each server resolves its own <abbr title="Internet Protocol">IP</abbr> address as the <abbr title="Address">A</abbr>-record. On backend one the zone file for <em>proxy.example.org</em> reports:</p>
-          <pre>@ in a 192.0.2.1</pre>
-          <p>On backend two the same zone file contains:</p>
-          <pre>@ in a 203.0.113.2</pre>
-          <p>This way, when a server is down, its <abbr title="Domain Name System">DNS</abbr> will not respond and the web service does not receive any traffic. If the line to one server is congested, the unreliability of <abbr title="Domain Name System">DNS</abbr> ensures less <abbr title="Hypertext Transfer Protocol">HTTP</abbr> traffic reaches that server. Furthermore, the quickest <abbr title="Domain Name System">DNS</abbr> response to the resolver is nearly always the one from the network's closest server, ensuring geo-sensitive load-balancing. A short <abbr title="Time To Live">TTL</abbr> on the <abbr title="Address">A</abbr>-record helps to ensure traffic is quickly diverted when a server goes down. Consideration must be given the possibility that this technique may cause individual clients to switch between individual servers in mid-session.</p>
-        </section>
-        <hr>
-        <section>
-          <h2>Using the rewrite function</h2>
-          <p>The <a href="sys-referenceconf.html" title="proxy.conf" type="text/html">proxy.conf</a> configuration allows <abbr title="Uniform Resource Locator">URL</abbr> rewriting. You can use this to rewrite traffic from one proxy to the other. While very limited, this could be used to have one proxy with a restrictive whitelist but high bandwidth to access certain sites, and rewrite all other destinations to the secondary proxy - implementing a <abbr title="Quality of Service">QoS</abbr>-esque mechanic.</p>
-        </section>
-      </article>
-    </main>
-    <footer class="container">
-      <hr>
-      <p>
-        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html"><img alt="CC-BY 4.0" src="../img/80x15.png"></a>&nbsp;<small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" title="CC-BY 4.0" type="text/html">Creative Commons Attribution 4.0 International License</a>.</small><br>
-        <img alt="Free Software" src="../img/freesoftware.png">&nbsp;<img alt="Open Source" src="../img/opensource.png">&nbsp;<a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><img alt="MIT License" src="../img/mitlicense.png"></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/master/doc/COPYING.md" target="_blank" title="MIT License" type="text/html"><abbr title="Massachusetts Institute of Technology">MIT</abbr> license</a>.</small>
-      </p>
-      <p><small>Excerpts on round robin <abbr title="Domain Name System">DNS</abbr> are taken from Wikipedia, which is <a href="https://en.wikipedia.org/wiki/Wikipedia:Text_of_Creative_Commons_Attribution-ShareAlike_3.0_Unported_License" target="_blank" title="CC-BY-SA 3.0" type="text/html"><abbr title="Creative Commons - Attribution - Share Alike">CC-BY-SA</abbr> 3.0</a>.</small></p>
-    </footer>
-    <script src="../lib/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
-    <script src="../lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-  </body>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Multiple load-balanced instances | SwiperProxy</title>
+		<meta content="self" http-equiv="Content-Security-Policy">
+		<meta content="swiperproxy" http-equiv="default-style">
+		<meta content="The SwiperProxy Team" name="author">
+		<meta content="The SwiperProxy Team" name="creator">
+		<meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
+		<meta content="index, follow" name="googlebot">
+		<meta content="swiperproxy, swiper, proxy, web, python, http, https" name="keywords">
+		<meta content="The SwiperProxy Team" name="publisher">
+		<meta content="index, follow" name="robots">
+		<meta content="index, follow" name="slurp">
+		<link href="../humans.txt" rel="author" type="text/plain">
+		<link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/swiperproxy.min.css" id="swiperproxy" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="../index.html" hreflang="en" rel="index" title="SwiperProxy" type="text/html">SwiperProxy</a>
+					<button class="navbar-toggle collapsed" type="button" data-target="#navbar-main" data-toggle="collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar-main">
+					<ul class="nav navbar-nav">
+						<li><a href="../download.html" hreflang="en" title="Download" type="text/html"><span class="glyphicon glyphicon-save"></span> Download</a></li>
+						<li><a href="../quickstart.html" hreflang="en" rel="help" title="Quick-start" type="text/html"><span class="glyphicon glyphicon-file"></span> Quick-start</a></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Documentation" id="documentation"><span class="glyphicon glyphicon-book"></span> Documentation <span class="caret"></span></a>
+							<ul aria-labelledby="documentation" class="dropdown-menu">
+								<li><a href="sysadmin.html" hreflang="en" rel="help" title="Documentation for system administrators" type="text/html"><span class="glyphicon glyphicon-cog"></span> For system administrators</a></li>
+								<li><a href="developer.html" hreflang="en" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span> For developers</a></li>
+							</ul>
+						</li>
+						<li><a href="https://github.com/SwiperProxy/swiperproxy" hreflang="en" rel="external" target="_blank" title="Version control" type="text/html"><span class="fa fa-github"></span> Version control</a></li>
+						<li><a href="https://github.com/SwiperProxy/swiperproxy/issues" hreflang="en" rel="external" target="_blank" title="Issue tracker" type="text/html"><span class="glyphicon glyphicon-align-left"></span> Issue Tracker</a></li>
+						<li><a href="../donate.html" hreflang="en" title="Donate" type="text/html"><span class="glyphicon glyphicon-heart"></span> Donate</a></li>
+						<li><a href="../contact.html" hreflang="en" title="Contact" type="text/html"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<main class="container">
+			<article>
+				<h1>Multiple load-balanced instances</h1>
+				<hr>
+				<p>You may want to run two or more instances of SwiperProxy for various reasons. This can be on the same machine, or on multiple machines.</p>
+				<p>Of course, you could simply refer a portion of your users to <em>proxy1</em> and the other part to <em>proxy2</em>. However, more advanced techniques allow you to automate this process and distribute traffic between your instances.</p>
+				<hr>
+				<section>
+					<h2>Using load balancing software</h2>
+					<p>Just like how you can use a webserver to reverse proxy to a single SwiperProxy instance, it is also possible to reverse proxy to multiple instances. The method to do this greatly differs between webservers, and it's recommended you view your webserver documentation on how to do this.</p>
+				</section>
+				<hr>
+				<section>
+					<h2>Round-robin <abbr title="Domain Name System">DNS</abbr></h2>
+					<p>An alternate method of load balancing, which does not necessarily require a dedicated software or hardware node, is called round robin <abbr title="Domain Name System">DNS</abbr>. In this technique, multiple <abbr title="Internet Protocol">IP</abbr> addresses are associated with a single domain name; clients are expected to choose which server to connect to. Unlike the use of a dedicated load balancer, this technique exposes to clients the existence of multiple backend servers. The technique has other advantages and disadvantages, depending on the degree of control over the <abbr title="Domain Name System">DNS</abbr> server and the granularity of load balancing desired.</p>
+					<p>Another more effective technique for load-balancing using <abbr title="Domain Name System">DNS</abbr> is to delegate <em>proxy.example.org</em> as a sub-domain whose zone is served by each of the same servers that are serving the web site. This technique works particularly well where individual servers are spread geographically on the Internet. For example:</p>
+					<pre>backend1.example.org A	192.0.2.1
+backend2.example.org A	203.0.113.2
+proxy.example.org		NS backend1.example.org
+proxy.example.org		NS backend1.example.org</pre>
+					<p>However, the zone file for <em>proxy.example.org</em> on each server is different such that each server resolves its own <abbr title="Internet Protocol">IP</abbr> address as the <abbr title="Address">A</abbr>-record. On backend one the zone file for <em>proxy.example.org</em> reports:</p>
+					<pre>@ in a 192.0.2.1</pre>
+					<p>On backend two the same zone file contains:</p>
+					<pre>@ in a 203.0.113.2</pre>
+					<p>This way, when a server is down, its <abbr title="Domain Name System">DNS</abbr> will not respond and the web service does not receive any traffic. If the line to one server is congested, the unreliability of <abbr title="Domain Name System">DNS</abbr> ensures less <abbr title="Hypertext Transfer Protocol">HTTP</abbr> traffic reaches that server. Furthermore, the quickest <abbr title="Domain Name System">DNS</abbr> response to the resolver is nearly always the one from the network's closest server, ensuring geo-sensitive load-balancing. A short <abbr title="Time To Live">TTL</abbr> on the <abbr title="Address">A</abbr>-record helps to ensure traffic is quickly diverted when a server goes down. Consideration must be given the possibility that this technique may cause individual clients to switch between individual servers in mid-session.</p>
+				</section>
+				<hr>
+				<section>
+					<h2>Using the rewrite function</h2>
+					<p>The <a href="sys-referenceconf.html" hreflang="en" title="proxy.conf" type="text/html">proxy.conf</a> configuration allows <abbr title="Uniform Resource Locator">URL</abbr> rewriting. You can use this to rewrite traffic from one proxy to the other. While very limited, this could be used to have one proxy with a restrictive whitelist but high bandwidth to access certain sites, and rewrite all other destinations to the secondary proxy - implementing a <abbr title="Quality of Service">QoS</abbr>-esque mechanic.</p>
+				</section>
+			</article>
+		</main>
+		<footer class="container">
+			<hr>
+			<p>
+				<a href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="external license" target="_blank" title="CC-BY 4.0" type="text/html"><img alt="CC-BY 4.0" src="../img/80x15.png"></a> <small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="external license" target="_blank" title="CC-BY 4.0" type="text/html">Creative Commons Attribution 4.0 International License</a>.</small><br>
+				<img alt="Free Software" src="../img/freesoftware.png"> <img alt="Open Source" src="../img/opensource.png"> <a href="https://github.com/SwiperProxy/swiperproxy/blob/develop/doc/COPYING.md" hreflang="en" rel="external license" target="_blank" title="MIT License" type="text/html"><img alt="MIT License" src="../img/mitlicense.png"></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/develop/doc/COPYING.md" hreflang="en" rel="external license" target="_blank" title="MIT License" type="text/html"><abbr title="Massachusetts Institute of Technology">MIT</abbr> license</a>.</small>
+			</p>
+		</footer>
+		<script src="../lib/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+		<script src="../lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	</body>
 </html>
