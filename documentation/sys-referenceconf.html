@@ -86,6 +86,36 @@
 							<td>The port to listen on for <abbr title="HTTP Secure">HTTPS</abbr> connections. This is the port your users will connect to, e.g., if your proxy binds to 40443, your users will connect to <strong>proxy.example.org:40443</strong>. If you are using a webserver and are using a reverse proxy, the HTTPD should reverse proxy to this port. Keep in mind that <var><a href="sys-libcap.html" hreflang="en" title="CAP_NET_BIND_SERVICE" type="text/html">CAP_NET_BIND_SERVICE</a></var> is required to bind to privileged ports (&lt; 1024).</td>
 						</tr>
 						<tr>
+							<td><var>http_port</var></td>
+							<td>integer</td>
+							<td>0-65535</td>
+							<td>The port to proxy towards to for <abbr title="Hypertext Transport Protocol">HTTP</abbr> connections. This is the port SwiperProxy will connect to; usually, you'll want to leave this as port 80.</td>
+						</tr>
+						<tr>
+							<td><var>https_port</var></td>
+							<td>integer</td>
+							<td>0-65535</td>
+							<td>The port to proxy towards to for <abbr title="HTTP Secure">HTTPS</abbr> connections. This is the port SwiperProxy will connect to; usually, you'll want to leave this as port 443.</td>
+						</tr>
+						<tr>
+							<td><var>http_endpoint</var></td>
+							<td>string</td>
+							<td>/(...)</td>
+							<td>The path the proxy should redirect to for <abbr title="Hypertext Transport Protocol">HTTP</abbr> connections; to be used in conjuction with a reverse proxy when the proxy does not run at the web root.</td>
+						</tr>
+						<tr>
+							<td><var>https_endpoint</var></td>
+							<td>string</td>
+							<td>/(...)</td>
+							<td>The path the proxy should redirect to for <abbr title="HTTP Secure">HTTPS</abbr> connections; to be used in conjuction with a reverse proxy when the proxy does not run at the web root.</td>
+						</tr>
+						<tr>
+							<td><var>reverseproxy_scheme</var></td>
+							<td>string</td>
+							<td>'http' or 'https'</td>
+							<td>Whether to use <abbr title="Hypertext Transport Protocol">HTTP</abbr> or <abbr title="HTTP Secure">HTTPS</abbr> by default when the remote host has both available.</td>
+						</tr>
+						<tr>
 							<td><var>https_certificate</var></td>
 							<td>string</td>
 							<td>/path/to/file.pem</td>
