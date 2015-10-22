@@ -3,16 +3,16 @@
           "DTD/xhtml1-strict.dtd">
 <html>
   <head>
-    <title>Proxy.ProxyHandler.is_disallowed : API documentation</title>
+    <title>Util.using_reverseproxy : API documentation</title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
     <link href="apidocs.css" type="text/css" rel="stylesheet" />
     <script src="sorttable.js" type="text/javascript"></script>
     <script src="pydoctor.js" type="text/javascript"></script>
   </head>
   <body>
-    <h1 class="method">P.P.is_disallowed(self, remote_host) : method documentation</h1>
+    <h1 class="function">U.using_reverseproxy(config) : function documentation</h1>
     <p>
-      <span id="part">Part of <a href="Proxy.html">Proxy</a>.<a href="Proxy.ProxyHandler.html">ProxyHandler</a></span>
+      <span id="part">Part of <a href="Util.html">Util</a></span>
       
       
     </p>
@@ -20,9 +20,8 @@
       
     </div>
     <div class="docstring">
-      <div><p>Returns true if the remote_host is not allowed: its name is too long, it
-is not a correct hostname, contains only a single label or its addresses or
-the hostname itself are part of private networks.</p><table class="fieldTable"></table></div>
+      <div><p>Returns True if we are using a reverse proxy (config.http_endpoint != 
+config.https_endpoint), False otherwise.</p><table class="fieldTable"></table></div>
     </div>
 
     
