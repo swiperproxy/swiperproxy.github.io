@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>SwiperProxy version 1.1 released | SwiperProxy</title>
+		<meta content="self" http-equiv="Content-Security-Policy">
+		<meta content="swiperproxy" http-equiv="default-style">
+		<meta content="The SwiperProxy Team" name="author">
+		<meta content="The SwiperProxy Team" name="creator">
+		<meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
+		<meta content="index, follow" name="googlebot">
+		<meta content="swiperproxy, swiper, proxy, web, python, http, https" name="keywords">
+		<meta content="The SwiperProxy Team" name="publisher">
+		<meta content="index, follow" name="robots">
+		<meta content="index, follow" name="slurp">
+		<link href="../humans.txt" rel="author" type="text/plain">
+		<link href="../favicon.ico" rel="icon" sizes="152x152" type="image/icon">
+		<link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+		<link href="../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="../css/swiperproxy.min.css" id="swiperproxy" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="../index.html" hreflang="en" rel="index" title="SwiperProxy" type="text/html">SwiperProxy</a>
+					<button class="navbar-toggle collapsed" type="button" data-target="#navbar-main" data-toggle="collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar-main">
+					<ul class="nav navbar-nav">
+						<li><a href="../download.html" hreflang="en" title="Download" type="text/html"><span class="glyphicon glyphicon-save"></span> Download</a></li>
+						<li><a href="../quickstart.html" hreflang="en" rel="help" title="Quick-start" type="text/html"><span class="glyphicon glyphicon-file"></span> Quick-start</a></li>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Documentation" id="documentation"><span class="glyphicon glyphicon-book"></span> Documentation <span class="caret"></span></a>
+							<ul aria-labelledby="documentation" class="dropdown-menu">
+								<li><a href="../documentation/sysadmin.html" hreflang="en" rel="help" title="Documentation for system administrators" type="text/html"><span class="glyphicon glyphicon-cog"></span> For system administrators</a></li>
+								<li><a href="../documentation/developer.html" hreflang="en" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span> For developers</a></li>
+							</ul>
+						</li>
+						<li><a href="https://github.com/SwiperProxy/swiperproxy" hreflang="en" rel="external" target="_blank" title="Version control" type="text/html"><span class="fa fa-github"></span> Version control</a></li>
+						<li><a href="https://github.com/SwiperProxy/swiperproxy/issues" hreflang="en" rel="external" target="_blank" title="Issue tracker" type="text/html"><span class="glyphicon glyphicon-align-left"></span> Issue Tracker</a></li>
+						<li><a href="../donate.html" hreflang="en" title="Donate" type="text/html"><span class="glyphicon glyphicon-heart"></span> Donate</a></li>
+						<li><a href="../contact.html" hreflang="en" title="Contact" type="text/html"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<main class="container">
+			<h1>SwiperProxy version 1.1 released</h1>
+			<hr>
+			<p>After many hours of labour, version 1.1 of SwiperProxy is finally 'done'.</p>
+			<p>This release adds a variety of features maintainers will find useful, and some minor frontend and backend fixes.</p>
+			<p>For example, using endpoints, you can now run SwiperProxy from any <abbr title="Uniform Resource Identifier">URI</abbr>, rather than just the web root. Relative <abbr title="Uniform Resource Locator">URL</abbr>s are now handled properly, where in 1.0 they were often parsed incorrectly. End users are sure to appreciate being able to straight up copy paste any <abbr title="Uniform Resource Locator">URL</abbr> and go.</p>
+			<hr>
+			<section>
+				<h2>New features</h2>
+				<ul>
+					<li><abbr title="Hypertext Transport Protocol">HTTP</abbr>/<abbr title="HTTP Secure">HTTPS</abbr> endpoints, for use with a reverse proxy, allows installation in other locations than the web root.</li>
+					<li>The input field for the remote host <abbr title="Uniform Resource Locator">URL</abbr> will now automatically focus; and mobile browsers should open a <abbr title="Uniform Resource Locator">URL</abbr>-specific keyboard straight away.</li>
+				</ul>
+			</section>
+			<hr>
+			<section>
+				<h2>Fixes</h2>
+				<ul>
+					<li>Browsing to an <abbr title="Uniform Resource Locator">URL</abbr> in the form of <samp>http://example.org/path</samp> rather than <samp>example.org/path</samp> will no long fail, making copypasting easier.</li>
+					<li>The sysvinit script will now correctly load defaults before checking the <samp>$DIR</samp> variable to see if the package is installed.</li>
+					<li>Relative <abbr title="Uniform Resource Locator">URL</abbr>s will now correctly rewrite itself.</li>
+					<li>JavaScript libraries in <samp>htdocs</samp> will no longer return 403 errors.</li>
+				</ul>
+			</section>
+			<hr>
+			<section>
+				<h2>Other changes</h2>
+				<ul>
+					<li>py-streamhtmlparser has been split off into <a href="https://github.com/swiperproxy/py-streamhtmlparser" hreflang="en" rel="external" target="_blank" type="text/html">its own project</a>. Both the streamhtmlparser library and the py-streamhtmlparser wrapper are still included but will be properly split from distribution in the 2.0 release.</li>
+					<li><samp>htdocs</samp> now use an external <abbr title="Cascading Style Sheets">CSS</abbr> file, and default to minified.</li>
+					<li>Some old code has been refactored.</li>
+					<li>The PyDev project files are now included in the <samp>develop</samp> branch.</li>
+					<li>Bootstrap has been updated to 3.3.5 and jQuery has been updated to 2.1.4.</li>
+				</ul>
+			</section>
+			<hr>
+			<section>
+				<h2>Minor changes</h2>
+				<ul>
+					<li>There's a generic favicon now. Yay?</li>
+					<li>Some meta elements have been added to <samp>htdocs</samp>.</li>
+				</ul>
+			</section>
+		</main>
+		<footer class="container">
+			<hr>
+			<p>
+				<a href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="external license" target="_blank" title="CC-BY 4.0" type="text/html"><img alt="CC-BY 4.0" src="../img/80x15.png"></a> <small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="external license" target="_blank" title="CC-BY 4.0" type="text/html">Creative Commons Attribution 4.0 International License</a>.</small><br>
+				<img alt="Free Software" src="../img/freesoftware.png"> <img alt="Open Source" src="../img/opensource.png"> <a href="https://github.com/SwiperProxy/swiperproxy/blob/develop/doc/COPYING.md" hreflang="en" rel="external license" target="_blank" title="MIT License" type="text/html"><img alt="MIT License" src="../img/mitlicense.png"></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/develop/doc/COPYING.md" hreflang="en" rel="external license" target="_blank" title="MIT License" type="text/html"><abbr title="Massachusetts Institute of Technology">MIT</abbr> license</a>.</small>
+			</p>
+		</footer>
+		<script src="../lib/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+		<script src="../lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	</body>
+</html>
