@@ -74,21 +74,22 @@
 						<h3>Select your distribution:</h3>
 						<div ng-app id="ng-app">
 							<ul>
-								<li><a href="#" ng-click="debian=!debian" ng-model="debian">Debian 7 Wheezy</a></li>
+								<li><a href="#" ng-click="debian=!debian" ng-model="debian">Debian 7 Wheezy, Debian 8 Jessie</a></li>
+								<li><a href="#" ng-click="centos=!centos" ng-model="centos">CentOS/RHEL 7</a></li>
 							</ul>
 							<div ng-show="debian">
 								<hr>
 								<section>
-									<h3>Debian 7 Wheezy</h3>
+									<h3>Debian 7 Wheezy, Debian 8 Jessie</h3>
 									<p>Install the dependencies available from the stable repository:<br>
 									<kbd>$ apt-get install build-essential cython python python-dev python-ipy</kbd></p>
 									<p>Download and extract SwiperProxy:<br>
 									<kbd>$ mkdir /opt/SwiperProxy</kbd><br>
 									<kbd>$ wget https://github.com/SwiperProxy/swiperproxy/archive/v1.1.tar.gz \</kbd><br>
 									<kbd>-O /usr/local/src/swiperproxy-v1.1.tar.gz</kbd><br>
-									<kbd>$ tar -zxvf /usr/local/src/swiperproxy-v1.1.tar.gz</kbd><br>
-									<kbd>$ mv /usr/local/src/swiperproxy /opt/SwiperProxy/swiperproxy</kbd></p>
-									<p>Compile streamhtmlparser and its Python module:<br>
+									<kbd>$ tar -zxvf swiperproxy-v1.1.tar.gz</kbd><br>
+									<kbd>$ mv swiperproxy-v1.1 /opt/SwiperProxy/swiperproxy</kbd></p>
+									<p>Compile streamhtmlparser and the wrapper:<br>
 									<kbd>$ cd /opt/SwiperProxy/swiperproxy/include/streamhtmlparser</kbd><br>
 									<kbd>$ ./configure</kbd><br>
 									<kbd>$ make</kbd><br>
@@ -103,6 +104,39 @@
 									<kbd>$ mkdir /var/log/swiperproxy</kbd><br>
 									<kbd>$ addgroup --system swiperproxy</kbd><br>
 									<kbd>$ adduser --system swiperproxy --ingroup=swiperproxy --home=/opt/SwiperProxy/swiperproxy</kbd><br>
+									<kbd>$ chown swiperproxy:swiperproxy /var/log/swiperproxy</kbd><br>
+									<kbd>$ chown -R swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy</kbd></p>
+								</section>
+							</div>
+							<div ng-show="centos">
+								<hr>
+								<section>
+									<h3>CentOS/RHEL 7</h3>
+									<p>Install the dependencies available from the repository:<br>
+									<kbd>$ yum install Cython python-devel python-IPy wget</kbd></p>
+									<p>Install tools required to compile libraries:<br>
+									<kbd>$ yum groupinstall 'Development Tools'</kbd></p>
+									<p>Download and extract SwiperProxy:<br>
+									<kbd>$ mkdir /opt/SwiperProxy</kbd><br>
+									<kbd>$ wget https://github.com/SwiperProxy/swiperproxy/archive/v1.1.tar.gz \</kbd><br>
+									<kbd>-O /usr/local/src/swiperproxy-v1.1.tar.gz</kbd><br>
+									<kbd>$ tar -zxvf swiperproxy-v1.1.tar.gz</kbd><br>
+									<kbd>$ mv swiperproxy-v1.1 /opt/SwiperProxy/swiperproxy</kbd></p>
+									<p>Compile streamhtmlparser and the wrapper:<br>
+									<kbd>$ cd /opt/SwiperProxy/swiperproxy/include/streamhtmlparser</kbd><br>
+									<kbd>$ ./configure</kbd><br>
+									<kbd>$ make</kbd><br>
+									<kbd>$ make install</kbd><br>
+									<kbd>$ cd src/py-streamhtmlparser</kbd><br>
+									<kbd>$ make</kbd><br>
+									<kbd>$ make install</kbd></p>
+									<p>Copy the shared libraries to a location where the distribution will recognize them:<br>
+									<kbd>$ cp /usr/local/lib/* /usr/lib</kbd><br>
+									<kbd>$ ldconfig -v</kbd></p>
+									<p>Create the runtime environment and add an unprivileged user:<br>
+									<kbd>$ mkdir /var/log/swiperproxy</kbd><br>
+									<kbd>$ groupadd -r swiperproxy</kbd><br>
+									<kbd>$ useradd -d /opt/Swiperproxy/swiperproxy -g swiperproxy -M -r swiperproxy</kbr><br>
 									<kbd>$ chown swiperproxy:swiperproxy /var/log/swiperproxy</kbd><br>
 									<kbd>$ chown -R swiperproxy:swiperproxy /opt/SwiperProxy/swiperproxy</kbd></p>
 								</section>
