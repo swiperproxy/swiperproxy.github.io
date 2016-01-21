@@ -2,50 +2,68 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>Running SwiperProxy as a daemon | SwiperProxy</title>
-		<meta content="self" http-equiv="Content-Security-Policy">
 		<meta content="swiperproxy" http-equiv="default-style">
-		<meta content="The SwiperProxy Team" name="author">
-		<meta content="The SwiperProxy Team" name="creator">
-		<meta content="A lightning-fast, open source web proxy that is easy for you to run and customize." name="description">
-		<meta content="index, follow" name="googlebot">
-		<meta content="swiperproxy, swiper, proxy, web, python, http, https" name="keywords">
-		<meta content="The SwiperProxy Team" name="publisher">
-		<meta content="index, follow" name="robots">
-		<meta content="index, follow" name="slurp">
-		<link href="../humans.txt" rel="author" type="text/plain">
-		<link href="../favicon.ico" rel="icon" sizes="152x152" type="image/icon">
-		<link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-		<link href="../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-		<link href="../css/swiperproxy.min.css" id="swiperproxy" rel="stylesheet" type="text/css">
+		<meta content="self" http-equiv="Content-Security-Policy">
+		<meta content="IE=edge" http-equiv="X-UA-Compatible">
+		<meta name="author" content="Patrick Godschalk">
+		<meta name="description" content="A lightning-fast, open source web proxy that is easy for you to run and customize.">
+		<meta name="keywords" content="swiperproxy, swiper, proxy, web, python, http, https">
+		<meta name="creator" content="Patrick Godschalk">
+		<meta name="googlebot" content="index, follow">
+		<meta name="publisher" content="SwiperProxy">
+		<meta name="robots" content="index, follow">
+		<meta name="slurp" content="index, follow">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Running SwiperProxy as a daemon | SwiperProxy</title>
+		<link type="text/plain" href="../humans.txt" rel="author">
+		<link type="image/icon" href="../favicon.ico" rel="icon" sizes="152x152">
+		<link type="text/css" href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link type="text/css" href="../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+		<link id="swiperproxy" type="text/css" href="../css/swiperproxy.min.css" rel="stylesheet">
 	</head>
 	<body>
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="../index.html" hreflang="en" rel="index" title="SwiperProxy" type="text/html">SwiperProxy</a>
-					<button class="navbar-toggle collapsed" type="button" data-target="#navbar-main" data-toggle="collapse">
+					<button class="navbar-toggle collapsed" data-target="#navbar-main" data-toggle="collapse" type="button" aria-controls="navbar-main" aria-expanded="false">
 						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
+						<span class="icon-bar" aria-hidden="true"></span>
+						<span class="icon-bar" aria-hidden="true"></span>
+						<span class="icon-bar" aria-hidden="true"></span>
 					</button>
 				</div>
 				<div class="collapse navbar-collapse" id="navbar-main">
 					<ul class="nav navbar-nav">
-						<li><a href="../download.html" hreflang="en" title="Download" type="text/html"><span class="glyphicon glyphicon-save"></span> Download</a></li>
-						<li><a href="../quickstart.html" hreflang="en" rel="help" title="Quick-start" type="text/html"><span class="glyphicon glyphicon-file"></span> Quick-start</a></li>
+						<li>
+							<a type="text/html" href="../download.html" hreflang="en"><span class="glyphicon glyphicon-save" aria-hidden="true"></span> Download</a>
+						</li>
+						<li>
+							<a type="text/html" href="../quickstart.html" hreflang="en"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Quick-start</a>
+						</li>
 						<li class="dropdown">
-							<a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Documentation" id="documentation"><span class="glyphicon glyphicon-book"></span> Documentation <span class="caret"></span></a>
-							<ul aria-labelledby="documentation" class="dropdown-menu">
-								<li><a href="sysadmin.html" hreflang="en" rel="help" title="Documentation for system administrators" type="text/html"><span class="glyphicon glyphicon-cog"></span> For system administrators</a></li>
-								<li><a href="developer.html" hreflang="en" title="Documentation for developers" type="text/html"><span class="glyphicon glyphicon-wrench"></span> For developers</a></li>
+							<a class="dropdown-toggle" id="documentation" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-book"></span> Documentation <span class="caret" aria-hidden="true"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="documentation">
+								<li>
+									<a type="text/html" href="sysadmin.html" hreflang="en"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> For system administrators</a>
+								</li>
+								<li>
+									<a type="text/html" href="developer.html" hreflang="en"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> For developers</a>
+								</li>
 							</ul>
 						</li>
-						<li><a href="https://github.com/SwiperProxy/swiperproxy" hreflang="en" rel="external" target="_blank" title="Version control" type="text/html"><span class="fa fa-github"></span> Version control</a></li>
-						<li><a href="https://github.com/SwiperProxy/swiperproxy/issues" hreflang="en" rel="external" target="_blank" title="Issue tracker" type="text/html"><span class="glyphicon glyphicon-align-left"></span> Issue Tracker</a></li>
-						<li><a href="../donate.html" hreflang="en" title="Donate" type="text/html"><span class="glyphicon glyphicon-heart"></span> Donate</a></li>
-						<li><a href="../contact.html" hreflang="en" title="Contact" type="text/html"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+						<li>
+							<a type="text/html" href="https://github.com/SwiperProxy/swiperproxy" hreflang="en" rel="external" target="_blank"><span class="fa fa-github" aria-hidden="true"></span> Version control</a>
+						</li>
+						<li>
+							<a type="text/html" href="https://github.com/SwiperProxy/swiperproxy/issues" hreflang="en" rel="external" target="_blank"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> Issue Tracker</a>
+						</li>
+						<li>
+							<a type="text/html" href="../donate.html" hreflang="en" rel="author"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> Donate</a>
+						</li>
+						<li>
+							<a type="text/html" href="../contact.html" hreflang="en" rel="author"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Contact</a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -72,11 +90,12 @@
 		<footer class="container">
 			<hr>
 			<p>
-				<a href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="external license" target="_blank" title="CC-BY 4.0" type="text/html"><img alt="CC-BY 4.0" src="../img/80x15.png"></a> <small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="external license" target="_blank" title="CC-BY 4.0" type="text/html">Creative Commons Attribution 4.0 International License</a>.</small><br>
-				<img alt="Free Software" src="../img/freesoftware.png"> <img alt="Open Source" src="../img/opensource.png"> <a href="https://github.com/SwiperProxy/swiperproxy/blob/develop/doc/COPYING.md" hreflang="en" rel="external license" target="_blank" title="MIT License" type="text/html"><img alt="MIT License" src="../img/mitlicense.png"></a> <small>SwiperProxy is free and open source software available under the <a href="https://github.com/SwiperProxy/swiperproxy/blob/develop/doc/COPYING.md" hreflang="en" rel="external license" target="_blank" title="MIT License" type="text/html"><abbr title="Massachusetts Institute of Technology">MIT</abbr> license</a>.</small>
+				<a type="text/html" href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="external license" target="_blank"><img src="../img/80x15.png" alt="CC-BY 4.0"></a> <small>The SwiperProxy website and SwiperProxy documentation is licensed under a <a type="text/html" href="https://creativecommons.org/licenses/by/4.0/" hreflang="en" rel="external license" target="_blank">Creative Commons Attribution 4.0 International License</a>.</small>
+				<br>
+				<img src="../img/freesoftware.png" alt="Free Software"> <img src="../img/opensource.png" alt="Open Source"> <a type="text/html" href="https://github.com/SwiperProxy/swiperproxy/blob/develop/doc/COPYING.md" hreflang="en" rel="external license" target="_blank"><img src="../img/mitlicense.png" alt="MIT License"></a> <small>SwiperProxy is free and open source software available under the <a type="text/html" href="https://github.com/SwiperProxy/swiperproxy/blob/develop/doc/COPYING.md" hreflang="en" rel="external license" target="_blank"><abbr title="Massachusetts Institute of Technology">MIT</abbr> license</a>.</small>
 			</p>
 		</footer>
-		<script src="../lib/jquery/jquery-2.1.4.min.js" type="text/javascript"></script>
+		<script src="../lib/jquery/jquery.min.js" type="text/javascript"></script>
 		<script src="../lib/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	</body>
 </html>
